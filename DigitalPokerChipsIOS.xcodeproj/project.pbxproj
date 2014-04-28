@@ -210,8 +210,6 @@
 		FB888B26190E9672001FC737 /* LICENSE_Chipmunk.txt in Resources */ = {isa = PBXBuildFile; fileRef = FB888B25190E9672001FC737 /* LICENSE_Chipmunk.txt */; };
 		FB888B2A190E9672001FC737 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB888B29190E9672001FC737 /* main.m */; };
 		FB888B2E190E9672001FC737 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB888B2D190E9672001FC737 /* AppDelegate.m */; };
-		FB888B31190E9672001FC737 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = FB888B30190E9672001FC737 /* HelloWorldScene.m */; };
-		FB888B34190E9672001FC737 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = FB888B33190E9672001FC737 /* IntroScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -649,10 +647,6 @@
 		FB888B29190E9672001FC737 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
 		FB888B2C190E9672001FC737 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		FB888B2D190E9672001FC737 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
-		FB888B2F190E9672001FC737 /* HelloWorldScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
-		FB888B30190E9672001FC737 /* HelloWorldScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HelloWorldScene.m; path = Classes/HelloWorldScene.m; sourceTree = "<group>"; };
-		FB888B32190E9672001FC737 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
-		FB888B33190E9672001FC737 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1542,10 +1536,6 @@
 			children = (
 				FB888B2C190E9672001FC737 /* AppDelegate.h */,
 				FB888B2D190E9672001FC737 /* AppDelegate.m */,
-				FB888B2F190E9672001FC737 /* HelloWorldScene.h */,
-				FB888B30190E9672001FC737 /* HelloWorldScene.m */,
-				FB888B32190E9672001FC737 /* IntroScene.h */,
-				FB888B33190E9672001FC737 /* IntroScene.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1707,7 +1697,6 @@
 				FB8889E9190E9671001FC737 /* NSThread+performBlock.m in Sources */,
 				FB888974190E9670001FC737 /* CCShaderCache.m in Sources */,
 				FB888AB1190E9671001FC737 /* CCBSequenceProperty.m in Sources */,
-				FB888B34190E9672001FC737 /* IntroScene.m in Sources */,
 				FB8889B8190E9671001FC737 /* CCGLView.m in Sources */,
 				FB88897B190E9670001FC737 /* CCSprite.m in Sources */,
 				FB8888D7190E9670001FC737 /* CCActionInterval.m in Sources */,
@@ -1747,7 +1736,6 @@
 				FB888977190E9670001FC737 /* ccShaders.m in Sources */,
 				FB888A8B190E9671001FC737 /* matrix.c in Sources */,
 				FB88899D190E9670001FC737 /* CCTiledMapLayer.m in Sources */,
-				FB888B31190E9672001FC737 /* HelloWorldScene.m in Sources */,
 				FB888A91190E9671001FC737 /* neon_matrix_impl.c in Sources */,
 				FB888916190E9670001FC737 /* CCLabelTTF.m in Sources */,
 				FB8889CB190E9671001FC737 /* NSEvent+CC.m in Sources */,
@@ -1989,6 +1977,7 @@
 				FB888B39190E9672001FC737 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FB888B3A190E9672001FC737 /* Build configuration list for PBXNativeTarget "DigitalPokerChipsIOS" */ = {
 			isa = XCConfigurationList;
@@ -1997,6 +1986,7 @@
 				FB888B3C190E9672001FC737 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

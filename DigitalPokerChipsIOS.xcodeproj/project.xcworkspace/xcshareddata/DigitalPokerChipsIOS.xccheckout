@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D9295C7C-4082-4FB4-A8A1-AD4B5A7AF348</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DigitalPokerChipsIOS</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>73B3C3C1-31B6-4EC7-A6BE-08220006DFCE</key>
+		<string>https://github.com/poliver87/DigitalPokerChipsIOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DigitalPokerChipsIOS.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>73B3C3C1-31B6-4EC7-A6BE-08220006DFCE</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/poliver87/DigitalPokerChipsIOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>73B3C3C1-31B6-4EC7-A6BE-08220006DFCE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>73B3C3C1-31B6-4EC7-A6BE-08220006DFCE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DigitalPokerChipsIOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>
