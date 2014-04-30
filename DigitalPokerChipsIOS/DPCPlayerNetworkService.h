@@ -23,5 +23,7 @@
 -(void) leaveTable:(NSString*)msg;
 -(void) startReconnect:(NSData*)hostBytes reconnectString:(NSString*)connectString;
 -(void) stopReconnect;
+-(void)stopListen;
+-(void) disconnectCurrentGame;
 
 @end

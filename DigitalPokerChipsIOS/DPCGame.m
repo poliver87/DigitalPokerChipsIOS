@@ -12,6 +12,13 @@
 #import "DPCWorldLayer.h"
 #import "DPCUILayer.h"
 
+NSString* DEBUG_LOG_LIFECYCLE_TAG=@"DPCLifecycle";
+const NSString* DEBUG_LOG_NETWORK_TAG=@"DPCNetwork";
+const NSString* DEBUG_LOG_TABLE_TAG=@"DPCTable";
+const NSString* DEBUG_LOG_PLAYER_TAG=@"DPCPlayer";
+const NSString* DEBUG_LOG_GAME_MOVES_TAG=@"DPCGameMoves";
+
+
 @interface DPCGame () {
     DPCWorldLayer* worldLayer;
     DPCUILayer* uiLayer;
@@ -36,6 +43,10 @@ static DPCGame* sharedDPCGame = nil;
 {
 	NSAssert(sharedDPCGame != nil, @"DPCGame not available!");
 	return sharedDPCGame;
+}
+
++(BOOL) sharedGameAvailable {
+    return (sharedDPCGame!=nil);
 }
 
 -(DPCWorldLayer*) getWorldLayer {
@@ -101,6 +112,14 @@ static DPCGame* sharedDPCGame = nil;
     [uiLayer resize:[[CCDirector sharedDirector] viewSize]];
     [worldLayer initialiseCamera];
     [self setWifiEnabled:[_reachability isReachableViaWiFi]];
+}
+
+-(void)onStart {
+    [worldLayer onStart];
+}
+
+-(void)onStop {
+    [worldLayer onStop];
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer*)aPanGestureRecognizer {

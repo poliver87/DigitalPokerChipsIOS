@@ -15,6 +15,7 @@
 #import "DPCChipCase.h"
 #import "DPCChipStack.h"
 #import "DPCGameLogic.h"
+#import "DPCLogger.h"
 
 NSString *const CONN_NONE=@"CONN_NONE";
 NSString *const CONN_IDLE=@"CONN_IDLE";
@@ -462,7 +463,6 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void)notifyAtPlayerPosition {
-    //mWL.game.mFL.notifyAtPlayerPosition();
     DPCUILayer* mUIL=[[DPCGame sharedGame] getUILayer];
     DPCWorldLayer* mWL=[[DPCGame sharedGame] getWorldLayer];
     [mUIL notifyAtPlayerPosition];
@@ -538,6 +538,7 @@ ccColor3B colors[] = {{255,0,0},
         [_joinToken setPosition:joinTokenStart];
         [[[DPCGame sharedGame] getUILayer] startBuyin:table.tableName loadedGame:loadedGame];
     }
+    [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"table found"];
 }
 
 -(void)clearAllStacks {
@@ -630,6 +631,7 @@ ccColor3B colors[] = {{255,0,0},
         [self notifyTableDisconnected];
         [self searchHoldoff];
     }
+    [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"leaveTable"];
 }
 
 -(void) setPickedUpChip:(DPCChip*)newPUC {
@@ -826,16 +828,25 @@ ccColor3B colors[] = {{255,0,0},
     [networkInterface setWifiEnabled:NO];
 }
 
+-(void)onStart {
+    [networkInterface onStart];
+}
+
+-(void)onStop {
+    [networkInterface onStop];
+}
+
 -(void) notifyConnectResult:(BOOL)result tableName:(NSString*) tableName {
     if (result) {
         _connectivityStatus=CONN_CONNECTED;
         _tableName=tableName;
         _plaqueRect.touchable=NO;
-        
+        [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"connect attempt success"];
     } else {
         _connectivityStatus=CONN_IDLE;
         [self searchHoldoff];
         [[[DPCGame sharedGame]getUILayer] stopBuyin];
+        [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"connect attempt failed"];
     }
     connectingTable=nil;
 }
@@ -844,11 +855,13 @@ ccColor3B colors[] = {{255,0,0},
     waitingOnHost=true;
     [self cancelMoveState];
     [[[DPCGame sharedGame] getUILayer] startReconnect];
+    [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"connectionn lost"];
 }
 
 -(void)notifyReconnected {
     waitingOnHost=NO;
     [[[DPCGame sharedGame] getUILayer] stopReconnect];
+    [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"reconnected"];
 }
 
 -(void) submitBet {
@@ -943,17 +956,17 @@ ccColor3B colors[] = {{255,0,0},
     [self promptMove:betStake foldEnabled:foldEnabled message:mUIL.playerPrompt.string];
 }
 
+-(void)bellButtonPressed {
+    NSString* hostName=[[DPCGame sharedGame]getUILayer].tableStatusMenu.nudgeHostName;
+    [networkInterface sendBell:hostName];
+}
+
 -(void) textMessage:(NSString*) message {
     if ([message length]==0) {
         [[[DPCGame sharedGame] getUILayer] hideTextMessage];
     } else {
         [[[DPCGame sharedGame] getUILayer] showTextMessage:message];
     }
-}
-
--(void)bellButtonPressed {
-    NSString* hostName=[[DPCGame sharedGame]getUILayer].tableStatusMenu.nudgeHostName;
-    [networkInterface sendBell:hostName ];
 }
 
 -(void) setDealer:(BOOL)isDealer_ {
@@ -977,6 +990,7 @@ ccColor3B colors[] = {{255,0,0},
         [self notifyTableDisconnected];
         [self notifyReadyToSearch];
     }
+    [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"booted by host"];
 }
 
 -(void) notifyWaitNextHand {

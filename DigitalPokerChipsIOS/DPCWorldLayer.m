@@ -10,6 +10,7 @@
 #import "DPCWorldLayer.h"
 #import "DPCCamera.h"
 #import "DPCCameraPosition.h"
+#import "DPCLogger.h"
 
 @interface DPCWorldLayer () {
     
@@ -46,8 +47,8 @@
         
         _worldWidth = 3*background_lb.contentSize.width;
         _worldHeight = 2*background_lb.contentSize.height;
-        CCLOG(@"worldWidth: %d",_worldWidth);
-        CCLOG(@"worldHeight: %d",_worldHeight);
+        
+        [DPCLogger log:DEBUG_LOG_LIFECYCLE_TAG msg:[NSString stringWithFormat:@"WorldWidth: %d WorldHeight: %d",_worldWidth,_worldHeight]];
         
         _input=[[DPCWorldInput alloc] init];
         
@@ -197,6 +198,14 @@
 
 -(void) wifiOff {
     [_thisPlayer wifiOff];
+}
+
+-(void)onStart {
+    [_thisPlayer onStart];
+}
+
+-(void)onStop {
+    [_thisPlayer onStop];
 }
 
 -(void)touchBegan:(UITouch*)touch withEvent:(UIEvent*)event {

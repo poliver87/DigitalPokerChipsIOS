@@ -44,6 +44,8 @@
 
 -(void)wifiOn;
 -(void)wifiOff;
+-(void)onStart;
+-(void)onStop;
 
 -(BOOL) fling:(CGPoint)velocity;
 

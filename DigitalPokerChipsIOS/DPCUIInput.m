@@ -112,6 +112,9 @@ NSString *const TOUCH_TABLE_STATUS= @"TOUCH_TABLE_STATUS";
             } else if (mFL.tableStatusMenu.leaveButton.touchable&&[mFL.tableStatusMenu.leaveButton pointContained:touchPoint]) {
                 handled=YES;
                 mFL.tableStatusMenu.leaveButton.isTouched=YES;
+            } else if (mFL.tableStatusMenu.bellButton.touchable&&[mFL.tableStatusMenu.bellButton pointContained:touchPoint]) {
+                handled=YES;
+                mFL.tableStatusMenu.bellButton.isTouched=YES;
             }
         } else {
             [mFL closeTableStatusMenu];
@@ -138,6 +141,11 @@ NSString *const TOUCH_TABLE_STATUS= @"TOUCH_TABLE_STATUS";
         handled=true;
         mFL.tableStatusMenu.leaveButton.isTouched=NO;
         [mFL startLeaveTableDialog:mWL.thisPlayer.tableName];
+    }
+    if (mFL.tableStatusMenu.bellButton.isTouched) {
+        handled=true;
+        mFL.tableStatusMenu.bellButton.isTouched=NO;
+        [mWL.thisPlayer bellButtonPressed];
     }
     if (mFL.tableStatusMenu.handle.isTouched) {
         handled=true;
@@ -233,6 +241,12 @@ NSString *const TOUCH_TABLE_STATUS= @"TOUCH_TABLE_STATUS";
         handled=true;
         if (![mFL.tableStatusMenu.leaveButton pointContained:touchPoint]) {
             mFL.tableStatusMenu.leaveButton.isTouched=false;
+        }
+    }
+    if (mFL.tableStatusMenu.bellButton.isTouched) {
+        handled=true;
+        if (![mFL.tableStatusMenu.bellButton pointContained:touchPoint]) {
+            mFL.tableStatusMenu.bellButton.isTouched=false;
         }
     }
     if (mFL.homeMenu.joinButton.isTouched) {

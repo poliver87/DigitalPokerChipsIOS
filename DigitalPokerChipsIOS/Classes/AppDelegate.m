@@ -41,6 +41,8 @@
 		// Make iPad's act like they run at a 2x content scale. (iPad retina 4x)
 //		CCSetupTabletScale2X: @(YES),
 	}];
+    
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 	
 	return YES;
 }
@@ -49,6 +51,20 @@
 {
 	// This method should return the very first scene to be run when your app starts.
 	return [DPCGame scene];
+}
+
+-(void)applicationWillResignActive:(UIApplication *)application {
+    [super applicationWillResignActive:application];
+    if ([DPCGame sharedGameAvailable]) {
+        [[DPCGame sharedGame] onStop];
+    }
+}
+
+-(void)applicationDidBecomeActive:(UIApplication *)application {
+    [super applicationDidBecomeActive:application];
+    if ([DPCGame sharedGameAvailable]) {
+        [[DPCGame sharedGame] onStart];
+    }
 }
 
 @end

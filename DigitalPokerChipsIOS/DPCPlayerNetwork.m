@@ -7,6 +7,8 @@
 //
 
 #import "cocos2d.h"
+#import "DPCGame.h"
+#import "DPCLogger.h"
 #import "DPCPlayerNetwork.h"
 #import "DPCPlayerNetworkService.h"
 #import "DPCThisPlayer.h"
@@ -79,11 +81,30 @@ NSString *const PLAYER_TAG_SEND_BELL_CLOSE = @"<BELL_OPEN/>";
 }
 
 -(void) onStart {
+    CCLOG(@"DPCPlayerNetwork - onStart");
     
+    if (tableConnected) {
+        [_player notifyConnectionLost];
+    }
+    if (wifiEnabled) {
+        if (tableConnected) {
+            doingReconnect=true;
+            [self spawnReconnect];
+        }
+        if (doingHostDiscover) {
+            [self spawnDiscover];
+        }
+    }
 }
 
 -(void) onStop {
-    
+    CCLOG(@"DPCPlayerNetwork - onStop");
+    [playerNetworkService stopDiscover];
+    [playerNetworkService stopListen];
+    [playerNetworkService stopReconnect];
+    if (tableConnected) {
+        [playerNetworkService disconnectCurrentGame];
+    }
 }
 
 -(void) startRequestGames {
@@ -280,7 +301,7 @@ NSString *const PLAYER_TAG_SEND_BELL_CLOSE = @"<BELL_OPEN/>";
 }
 
 -(void) parseGameMessage:(NSString*)msg {
-    CCLOG(@"DPCPlayerNetwork - parseGameMessage: %@",msg);
+    [DPCLogger log:DEBUG_LOG_NETWORK_TAG msg:[NSString stringWithFormat:@"parseGameMessage: %@",msg]];
     BOOL resendReply=NO;
     if ([msg rangeOfString:@"<RESEND>"].location != NSNotFound &&
         [msg rangeOfString:@"<RESEND/>"].location != NSNotFound ) {

@@ -13,6 +13,12 @@
 #import "DPCWorldLayer.h"
 #import "DPCUILayer.h"
 
+extern NSString* DEBUG_LOG_LIFECYCLE_TAG;
+extern const NSString* DEBUG_LOG_NETWORK_TAG;
+extern const NSString* DEBUG_LOG_TABLE_TAG;
+extern const NSString* DEBUG_LOG_PLAYER_TAG;
+extern const NSString* DEBUG_LOG_GAME_MOVES_TAG;
+
 @interface DPCGame : CCScene <UIGestureRecognizerDelegate,CLLocationManagerDelegate> {
     
 }
@@ -24,7 +30,10 @@
 
 +(CCScene*) scene;
 +(DPCGame*) sharedGame;
++(BOOL) sharedGameAvailable;
 -(DPCWorldLayer*) getWorldLayer;
 -(DPCUILayer*) getUILayer;
+-(void)onStart;
+-(void)onStop;
 
 @end

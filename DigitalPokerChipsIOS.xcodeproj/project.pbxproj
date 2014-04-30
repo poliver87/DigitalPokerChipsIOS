@@ -7,6 +7,76 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB55EADC190EAA2400636739 /* DPCBuyinDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAA5190EAA2400636739 /* DPCBuyinDialog.m */; };
+		FB55EADD190EAA2400636739 /* DPCCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAA7190EAA2400636739 /* DPCCamera.m */; };
+		FB55EADE190EAA2400636739 /* DPCCameraPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAA9190EAA2400636739 /* DPCCameraPosition.m */; };
+		FB55EADF190EAA2400636739 /* DPCChip.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAAB190EAA2400636739 /* DPCChip.m */; };
+		FB55EAE0190EAA2400636739 /* DPCChipCase.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAAD190EAA2400636739 /* DPCChipCase.m */; };
+		FB55EAE1190EAA2400636739 /* DPCChipStack.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAAF190EAA2400636739 /* DPCChipStack.m */; };
+		FB55EAE2190EAA2400636739 /* DPCClosedDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAB1190EAA2400636739 /* DPCClosedDialog.m */; };
+		FB55EAE3190EAA2400636739 /* DPCDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAB3190EAA2400636739 /* DPCDialog.m */; };
+		FB55EAE4190EAA2400636739 /* DPCDialogWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAB5190EAA2400636739 /* DPCDialogWindow.m */; };
+		FB55EAE5190EAA2400636739 /* DPCDiscoveredTable.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAB7190EAA2400636739 /* DPCDiscoveredTable.m */; };
+		FB55EAE6190EAA2400636739 /* DPCGame.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAB9190EAA2400636739 /* DPCGame.m */; };
+		FB55EAE7190EAA2400636739 /* DPCGameLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EABB190EAA2400636739 /* DPCGameLogic.m */; };
+		FB55EAE8190EAA2400636739 /* DPCHomeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EABD190EAA2400636739 /* DPCHomeMenu.m */; };
+		FB55EAE9190EAA2400636739 /* DPCLeaveTableDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EABF190EAA2400636739 /* DPCLeaveTableDialog.m */; };
+		FB55EAEA190EAA2400636739 /* DPCPlayerEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAC1190EAA2400636739 /* DPCPlayerEntry.m */; };
+		FB55EAEB190EAA2400636739 /* DPCPlayerNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAC3190EAA2400636739 /* DPCPlayerNetwork.m */; };
+		FB55EAEC190EAA2400636739 /* DPCPlayerNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAC5190EAA2400636739 /* DPCPlayerNetworkService.m */; };
+		FB55EAED190EAA2400636739 /* DPCSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAC7190EAA2400636739 /* DPCSprite.m */; };
+		FB55EAEE190EAA2400636739 /* DPCTableStatusMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAC9190EAA2400636739 /* DPCTableStatusMenu.m */; };
+		FB55EAEF190EAA2400636739 /* DPCTextFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EACB190EAA2400636739 /* DPCTextFactory.m */; };
+		FB55EAF0190EAA2400636739 /* DPCTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EACD190EAA2400636739 /* DPCTextLabel.m */; };
+		FB55EAF1190EAA2400636739 /* DPCThisPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EACF190EAA2400636739 /* DPCThisPlayer.m */; };
+		FB55EAF2190EAA2400636739 /* DPCUIInput.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAD1190EAA2400636739 /* DPCUIInput.m */; };
+		FB55EAF3190EAA2400636739 /* DPCUILayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAD3190EAA2400636739 /* DPCUILayer.m */; };
+		FB55EAF4190EAA2400636739 /* DPCWorldInput.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAD5190EAA2400636739 /* DPCWorldInput.m */; };
+		FB55EAF5190EAA2400636739 /* DPCWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAD7190EAA2400636739 /* DPCWorldLayer.m */; };
+		FB55EAF6190EAA2400636739 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAD9190EAA2400636739 /* GCDAsyncSocket.m */; };
+		FB55EAF7190EAA2400636739 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EADB190EAA2400636739 /* GCDAsyncUdpSocket.m */; };
+		FB55EAFD190EB92600636739 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB55EAFC190EB92600636739 /* SystemConfiguration.framework */; };
+		FB55EB00190EBB5B00636739 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAFF190EBB5B00636739 /* Reachability.m */; };
+		FB55EB01190EBB9500636739 /* Reachability.h in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAFE190EBB5B00636739 /* Reachability.h */; };
+		FB55EB03190EBBFB00636739 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB55EB02190EBBFB00636739 /* CFNetwork.framework */; };
+		FB55EB05190EBC7300636739 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB55EB04190EBC7300636739 /* Security.framework */; };
+		FB55EB07190EBCBA00636739 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB55EB06190EBCBA00636739 /* CoreLocation.framework */; };
+		FB55EB22190EBEB500636739 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB08190EBEB500636739 /* arrow.png */; };
+		FB55EB23190EBEB500636739 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB09190EBEB500636739 /* back.png */; };
+		FB55EB24190EBEB500636739 /* background_lb.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB0A190EBEB500636739 /* background_lb.png */; };
+		FB55EB25190EBEB500636739 /* background_lt.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB0B190EBEB500636739 /* background_lt.png */; };
+		FB55EB26190EBEB500636739 /* background_mb.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB0C190EBEB500636739 /* background_mb.png */; };
+		FB55EB27190EBEB500636739 /* background_mt.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB0D190EBEB500636739 /* background_mt.png */; };
+		FB55EB28190EBEB500636739 /* background_rb.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB0E190EBEB500636739 /* background_rb.png */; };
+		FB55EB29190EBEB500636739 /* background_rt.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB0F190EBEB500636739 /* background_rt.png */; };
+		FB55EB2A190EBEB500636739 /* bell.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB10190EBEB500636739 /* bell.wav */; };
+		FB55EB2B190EBEB500636739 /* button_bell_red.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB11190EBEB500636739 /* button_bell_red.png */; };
+		FB55EB2C190EBEB500636739 /* button_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB12190EBEB500636739 /* button_blue.png */; };
+		FB55EB2D190EBEB500636739 /* button_red.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB13190EBEB500636739 /* button_red.png */; };
+		FB55EB2E190EBEB500636739 /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB14190EBEB500636739 /* cancel_button.png */; };
+		FB55EB2F190EBEB500636739 /* change.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB15190EBEB500636739 /* change.wav */; };
+		FB55EB30190EBEB500636739 /* check.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB16190EBEB500636739 /* check.wav */; };
+		FB55EB31190EBEB500636739 /* chip_0_0.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB17190EBEB500636739 /* chip_0_0.png */; };
+		FB55EB32190EBEB500636739 /* chip_0_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB18190EBEB500636739 /* chip_0_1.png */; };
+		FB55EB33190EBEB500636739 /* chip_0_2.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB19190EBEB500636739 /* chip_0_2.png */; };
+		FB55EB34190EBEB500636739 /* chip_1_0.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB1A190EBEB500636739 /* chip_1_0.png */; };
+		FB55EB35190EBEB500636739 /* chip_1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB1B190EBEB500636739 /* chip_1_1.png */; };
+		FB55EB36190EBEB500636739 /* chip_1_2.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB1C190EBEB500636739 /* chip_1_2.png */; };
+		FB55EB37190EBEB500636739 /* chip_2_0.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB1D190EBEB500636739 /* chip_2_0.png */; };
+		FB55EB38190EBEB500636739 /* chip_2_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB1E190EBEB500636739 /* chip_2_1.png */; };
+		FB55EB39190EBEB500636739 /* chip_2_2.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB1F190EBEB500636739 /* chip_2_2.png */; };
+		FB55EB3A190EBEB500636739 /* connection_blob.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB20190EBEB500636739 /* connection_blob.png */; };
+		FB55EB3B190EBEB500636739 /* dealer_chip.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB21190EBEB500636739 /* dealer_chip.png */; };
+		FB55EB3F190EBEBF00636739 /* dialog.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB3C190EBEBF00636739 /* dialog.png */; };
+		FB55EB40190EBEBF00636739 /* fold_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB3D190EBEBF00636739 /* fold_button.png */; };
+		FB55EB41190EBEBF00636739 /* fold.wav in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB3E190EBEBF00636739 /* fold.wav */; };
+		FB55EB48190EBEEA00636739 /* logo_dpc.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB42190EBEEA00636739 /* logo_dpc.png */; };
+		FB55EB49190EBEEA00636739 /* ok_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB43190EBEEA00636739 /* ok_button.png */; };
+		FB55EB4A190EBEEA00636739 /* SegoePrint.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB44190EBEEA00636739 /* SegoePrint.ttf */; };
+		FB55EB4B190EBEEA00636739 /* StoneSansSemiBooldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB45190EBEEA00636739 /* StoneSansSemiBooldItalic.ttf */; };
+		FB55EB4C190EBEEA00636739 /* table_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB46190EBEEA00636739 /* table_button.png */; };
+		FB55EB4D190EBEEA00636739 /* table_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB47190EBEEA00636739 /* table_highlight.png */; };
+		FB55EB4F190EBF5300636739 /* join_coin.png in Resources */ = {isa = PBXBuildFile; fileRef = FB55EB4E190EBF5300636739 /* join_coin.png */; };
 		FB888885190E966F001FC737 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB888884190E966F001FC737 /* QuartzCore.framework */; };
 		FB888887190E966F001FC737 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB888886190E966F001FC737 /* OpenGLES.framework */; };
 		FB888889190E966F001FC737 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB888888190E966F001FC737 /* OpenAL.framework */; };
@@ -210,6 +280,7 @@
 		FB888B26190E9672001FC737 /* LICENSE_Chipmunk.txt in Resources */ = {isa = PBXBuildFile; fileRef = FB888B25190E9672001FC737 /* LICENSE_Chipmunk.txt */; };
 		FB888B2A190E9672001FC737 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB888B29190E9672001FC737 /* main.m */; };
 		FB888B2E190E9672001FC737 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB888B2D190E9672001FC737 /* AppDelegate.m */; };
+		FBF900BE19114017006DA11D /* DPCLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF900BD19114017006DA11D /* DPCLogger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,6 +294,104 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FB55EAA4190EAA2400636739 /* DPCBuyinDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCBuyinDialog.h; sourceTree = "<group>"; };
+		FB55EAA5190EAA2400636739 /* DPCBuyinDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCBuyinDialog.m; sourceTree = "<group>"; };
+		FB55EAA6190EAA2400636739 /* DPCCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCCamera.h; sourceTree = "<group>"; };
+		FB55EAA7190EAA2400636739 /* DPCCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCCamera.m; sourceTree = "<group>"; };
+		FB55EAA8190EAA2400636739 /* DPCCameraPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCCameraPosition.h; sourceTree = "<group>"; };
+		FB55EAA9190EAA2400636739 /* DPCCameraPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCCameraPosition.m; sourceTree = "<group>"; };
+		FB55EAAA190EAA2400636739 /* DPCChip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCChip.h; sourceTree = "<group>"; };
+		FB55EAAB190EAA2400636739 /* DPCChip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCChip.m; sourceTree = "<group>"; };
+		FB55EAAC190EAA2400636739 /* DPCChipCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCChipCase.h; sourceTree = "<group>"; };
+		FB55EAAD190EAA2400636739 /* DPCChipCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCChipCase.m; sourceTree = "<group>"; };
+		FB55EAAE190EAA2400636739 /* DPCChipStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCChipStack.h; sourceTree = "<group>"; };
+		FB55EAAF190EAA2400636739 /* DPCChipStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCChipStack.m; sourceTree = "<group>"; };
+		FB55EAB0190EAA2400636739 /* DPCClosedDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCClosedDialog.h; sourceTree = "<group>"; };
+		FB55EAB1190EAA2400636739 /* DPCClosedDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCClosedDialog.m; sourceTree = "<group>"; };
+		FB55EAB2190EAA2400636739 /* DPCDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCDialog.h; sourceTree = "<group>"; };
+		FB55EAB3190EAA2400636739 /* DPCDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCDialog.m; sourceTree = "<group>"; };
+		FB55EAB4190EAA2400636739 /* DPCDialogWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCDialogWindow.h; sourceTree = "<group>"; };
+		FB55EAB5190EAA2400636739 /* DPCDialogWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCDialogWindow.m; sourceTree = "<group>"; };
+		FB55EAB6190EAA2400636739 /* DPCDiscoveredTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCDiscoveredTable.h; sourceTree = "<group>"; };
+		FB55EAB7190EAA2400636739 /* DPCDiscoveredTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCDiscoveredTable.m; sourceTree = "<group>"; };
+		FB55EAB8190EAA2400636739 /* DPCGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCGame.h; sourceTree = "<group>"; };
+		FB55EAB9190EAA2400636739 /* DPCGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCGame.m; sourceTree = "<group>"; };
+		FB55EABA190EAA2400636739 /* DPCGameLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCGameLogic.h; sourceTree = "<group>"; };
+		FB55EABB190EAA2400636739 /* DPCGameLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCGameLogic.m; sourceTree = "<group>"; };
+		FB55EABC190EAA2400636739 /* DPCHomeMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCHomeMenu.h; sourceTree = "<group>"; };
+		FB55EABD190EAA2400636739 /* DPCHomeMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCHomeMenu.m; sourceTree = "<group>"; };
+		FB55EABE190EAA2400636739 /* DPCLeaveTableDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCLeaveTableDialog.h; sourceTree = "<group>"; };
+		FB55EABF190EAA2400636739 /* DPCLeaveTableDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCLeaveTableDialog.m; sourceTree = "<group>"; };
+		FB55EAC0190EAA2400636739 /* DPCPlayerEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCPlayerEntry.h; sourceTree = "<group>"; };
+		FB55EAC1190EAA2400636739 /* DPCPlayerEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCPlayerEntry.m; sourceTree = "<group>"; };
+		FB55EAC2190EAA2400636739 /* DPCPlayerNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCPlayerNetwork.h; sourceTree = "<group>"; };
+		FB55EAC3190EAA2400636739 /* DPCPlayerNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCPlayerNetwork.m; sourceTree = "<group>"; };
+		FB55EAC4190EAA2400636739 /* DPCPlayerNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCPlayerNetworkService.h; sourceTree = "<group>"; };
+		FB55EAC5190EAA2400636739 /* DPCPlayerNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCPlayerNetworkService.m; sourceTree = "<group>"; };
+		FB55EAC6190EAA2400636739 /* DPCSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCSprite.h; sourceTree = "<group>"; };
+		FB55EAC7190EAA2400636739 /* DPCSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCSprite.m; sourceTree = "<group>"; };
+		FB55EAC8190EAA2400636739 /* DPCTableStatusMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCTableStatusMenu.h; sourceTree = "<group>"; };
+		FB55EAC9190EAA2400636739 /* DPCTableStatusMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCTableStatusMenu.m; sourceTree = "<group>"; };
+		FB55EACA190EAA2400636739 /* DPCTextFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCTextFactory.h; sourceTree = "<group>"; };
+		FB55EACB190EAA2400636739 /* DPCTextFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCTextFactory.m; sourceTree = "<group>"; };
+		FB55EACC190EAA2400636739 /* DPCTextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCTextLabel.h; sourceTree = "<group>"; };
+		FB55EACD190EAA2400636739 /* DPCTextLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCTextLabel.m; sourceTree = "<group>"; };
+		FB55EACE190EAA2400636739 /* DPCThisPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCThisPlayer.h; sourceTree = "<group>"; };
+		FB55EACF190EAA2400636739 /* DPCThisPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCThisPlayer.m; sourceTree = "<group>"; };
+		FB55EAD0190EAA2400636739 /* DPCUIInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCUIInput.h; sourceTree = "<group>"; };
+		FB55EAD1190EAA2400636739 /* DPCUIInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCUIInput.m; sourceTree = "<group>"; };
+		FB55EAD2190EAA2400636739 /* DPCUILayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCUILayer.h; sourceTree = "<group>"; };
+		FB55EAD3190EAA2400636739 /* DPCUILayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCUILayer.m; sourceTree = "<group>"; };
+		FB55EAD4190EAA2400636739 /* DPCWorldInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCWorldInput.h; sourceTree = "<group>"; };
+		FB55EAD5190EAA2400636739 /* DPCWorldInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCWorldInput.m; sourceTree = "<group>"; };
+		FB55EAD6190EAA2400636739 /* DPCWorldLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCWorldLayer.h; sourceTree = "<group>"; };
+		FB55EAD7190EAA2400636739 /* DPCWorldLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCWorldLayer.m; sourceTree = "<group>"; };
+		FB55EAD8190EAA2400636739 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		FB55EAD9190EAA2400636739 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		FB55EADA190EAA2400636739 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		FB55EADB190EAA2400636739 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		FB55EAFC190EB92600636739 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FB55EAFE190EBB5B00636739 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		FB55EAFF190EBB5B00636739 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		FB55EB02190EBBFB00636739 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		FB55EB04190EBC7300636739 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		FB55EB06190EBCBA00636739 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		FB55EB08190EBEB500636739 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		FB55EB09190EBEB500636739 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		FB55EB0A190EBEB500636739 /* background_lb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_lb.png; sourceTree = "<group>"; };
+		FB55EB0B190EBEB500636739 /* background_lt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_lt.png; sourceTree = "<group>"; };
+		FB55EB0C190EBEB500636739 /* background_mb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_mb.png; sourceTree = "<group>"; };
+		FB55EB0D190EBEB500636739 /* background_mt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_mt.png; sourceTree = "<group>"; };
+		FB55EB0E190EBEB500636739 /* background_rb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_rb.png; sourceTree = "<group>"; };
+		FB55EB0F190EBEB500636739 /* background_rt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_rt.png; sourceTree = "<group>"; };
+		FB55EB10190EBEB500636739 /* bell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell.wav; sourceTree = "<group>"; };
+		FB55EB11190EBEB500636739 /* button_bell_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bell_red.png; sourceTree = "<group>"; };
+		FB55EB12190EBEB500636739 /* button_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_blue.png; sourceTree = "<group>"; };
+		FB55EB13190EBEB500636739 /* button_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_red.png; sourceTree = "<group>"; };
+		FB55EB14190EBEB500636739 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
+		FB55EB15190EBEB500636739 /* change.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = change.wav; sourceTree = "<group>"; };
+		FB55EB16190EBEB500636739 /* check.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = check.wav; sourceTree = "<group>"; };
+		FB55EB17190EBEB500636739 /* chip_0_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chip_0_0.png; sourceTree = "<group>"; };
+		FB55EB18190EBEB500636739 /* chip_0_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chip_0_1.png; sourceTree = "<group>"; };
+		FB55EB19190EBEB500636739 /* chip_0_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chip_0_2.png; sourceTree = "<group>"; };
+		FB55EB1A190EBEB500636739 /* chip_1_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chip_1_0.png; sourceTree = "<group>"; };
+		FB55EB1B190EBEB500636739 /* chip_1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chip_1_1.png; sourceTree = "<group>"; };
+		FB55EB1C190EBEB500636739 /* chip_1_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chip_1_2.png; sourceTree = "<group>"; };
+		FB55EB1D190EBEB500636739 /* chip_2_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chip_2_0.png; sourceTree = "<group>"; };
+		FB55EB1E190EBEB500636739 /* chip_2_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chip_2_1.png; sourceTree = "<group>"; };
+		FB55EB1F190EBEB500636739 /* chip_2_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chip_2_2.png; sourceTree = "<group>"; };
+		FB55EB20190EBEB500636739 /* connection_blob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connection_blob.png; sourceTree = "<group>"; };
+		FB55EB21190EBEB500636739 /* dealer_chip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dealer_chip.png; sourceTree = "<group>"; };
+		FB55EB3C190EBEBF00636739 /* dialog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dialog.png; sourceTree = "<group>"; };
+		FB55EB3D190EBEBF00636739 /* fold_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fold_button.png; sourceTree = "<group>"; };
+		FB55EB3E190EBEBF00636739 /* fold.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fold.wav; sourceTree = "<group>"; };
+		FB55EB42190EBEEA00636739 /* logo_dpc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_dpc.png; sourceTree = "<group>"; };
+		FB55EB43190EBEEA00636739 /* ok_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ok_button.png; sourceTree = "<group>"; };
+		FB55EB44190EBEEA00636739 /* SegoePrint.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SegoePrint.ttf; sourceTree = "<group>"; };
+		FB55EB45190EBEEA00636739 /* StoneSansSemiBooldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoneSansSemiBooldItalic.ttf; sourceTree = "<group>"; };
+		FB55EB46190EBEEA00636739 /* table_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_button.png; sourceTree = "<group>"; };
+		FB55EB47190EBEEA00636739 /* table_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_highlight.png; sourceTree = "<group>"; };
+		FB55EB4E190EBF5300636739 /* join_coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = join_coin.png; sourceTree = "<group>"; };
 		FB888881190E966F001FC737 /* DigitalPokerChipsIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigitalPokerChipsIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB888884190E966F001FC737 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FB888886190E966F001FC737 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -647,6 +816,8 @@
 		FB888B29190E9672001FC737 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
 		FB888B2C190E9672001FC737 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		FB888B2D190E9672001FC737 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
+		FBF900BC19114017006DA11D /* DPCLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCLogger.h; sourceTree = "<group>"; };
+		FBF900BD19114017006DA11D /* DPCLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCLogger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -654,6 +825,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB55EB07190EBCBA00636739 /* CoreLocation.framework in Frameworks */,
+				FB55EB05190EBC7300636739 /* Security.framework in Frameworks */,
+				FB55EB03190EBBFB00636739 /* CFNetwork.framework in Frameworks */,
+				FB55EAFD190EB92600636739 /* SystemConfiguration.framework in Frameworks */,
 				FB88889B190E966F001FC737 /* libObjectiveChipmunk.a in Frameworks */,
 				FB888889190E966F001FC737 /* OpenAL.framework in Frameworks */,
 				FB88888F190E966F001FC737 /* UIKit.framework in Frameworks */,
@@ -691,6 +866,10 @@
 		FB888883190E966F001FC737 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FB55EB06190EBCBA00636739 /* CoreLocation.framework */,
+				FB55EB04190EBC7300636739 /* Security.framework */,
+				FB55EB02190EBBFB00636739 /* CFNetwork.framework */,
+				FB55EAFC190EB92600636739 /* SystemConfiguration.framework */,
 				FB888884190E966F001FC737 /* QuartzCore.framework */,
 				FB888886190E966F001FC737 /* OpenGLES.framework */,
 				FB888888190E966F001FC737 /* OpenAL.framework */,
@@ -720,6 +899,42 @@
 			children = (
 				FB88889E190E966F001FC737 /* Default.png */,
 				FB8888A0190E966F001FC737 /* Default@2x.png */,
+				FB55EB08190EBEB500636739 /* arrow.png */,
+				FB55EB09190EBEB500636739 /* back.png */,
+				FB55EB0A190EBEB500636739 /* background_lb.png */,
+				FB55EB0B190EBEB500636739 /* background_lt.png */,
+				FB55EB0C190EBEB500636739 /* background_mb.png */,
+				FB55EB4E190EBF5300636739 /* join_coin.png */,
+				FB55EB0D190EBEB500636739 /* background_mt.png */,
+				FB55EB3C190EBEBF00636739 /* dialog.png */,
+				FB55EB3D190EBEBF00636739 /* fold_button.png */,
+				FB55EB3E190EBEBF00636739 /* fold.wav */,
+				FB55EB0E190EBEB500636739 /* background_rb.png */,
+				FB55EB42190EBEEA00636739 /* logo_dpc.png */,
+				FB55EB43190EBEEA00636739 /* ok_button.png */,
+				FB55EB44190EBEEA00636739 /* SegoePrint.ttf */,
+				FB55EB45190EBEEA00636739 /* StoneSansSemiBooldItalic.ttf */,
+				FB55EB46190EBEEA00636739 /* table_button.png */,
+				FB55EB47190EBEEA00636739 /* table_highlight.png */,
+				FB55EB0F190EBEB500636739 /* background_rt.png */,
+				FB55EB10190EBEB500636739 /* bell.wav */,
+				FB55EB11190EBEB500636739 /* button_bell_red.png */,
+				FB55EB12190EBEB500636739 /* button_blue.png */,
+				FB55EB13190EBEB500636739 /* button_red.png */,
+				FB55EB14190EBEB500636739 /* cancel_button.png */,
+				FB55EB15190EBEB500636739 /* change.wav */,
+				FB55EB16190EBEB500636739 /* check.wav */,
+				FB55EB17190EBEB500636739 /* chip_0_0.png */,
+				FB55EB18190EBEB500636739 /* chip_0_1.png */,
+				FB55EB19190EBEB500636739 /* chip_0_2.png */,
+				FB55EB1A190EBEB500636739 /* chip_1_0.png */,
+				FB55EB1B190EBEB500636739 /* chip_1_1.png */,
+				FB55EB1C190EBEB500636739 /* chip_1_2.png */,
+				FB55EB1D190EBEB500636739 /* chip_2_0.png */,
+				FB55EB1E190EBEB500636739 /* chip_2_1.png */,
+				FB55EB1F190EBEB500636739 /* chip_2_2.png */,
+				FB55EB20190EBEB500636739 /* connection_blob.png */,
+				FB55EB21190EBEB500636739 /* dealer_chip.png */,
 				FB8888A2190E966F001FC737 /* Default-568h@2x.png */,
 				FB8888A4190E9670001FC737 /* Default-Landscape~ipad.png */,
 				FB8888C1190E9670001FC737 /* Info.plist */,
@@ -1534,8 +1749,68 @@
 		FB888B2B190E9672001FC737 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				FB55EAFE190EBB5B00636739 /* Reachability.h */,
+				FB55EAFF190EBB5B00636739 /* Reachability.m */,
+				FB55EAD8190EAA2400636739 /* GCDAsyncSocket.h */,
+				FB55EAD9190EAA2400636739 /* GCDAsyncSocket.m */,
+				FB55EADA190EAA2400636739 /* GCDAsyncUdpSocket.h */,
+				FB55EADB190EAA2400636739 /* GCDAsyncUdpSocket.m */,
+				FBF900BC19114017006DA11D /* DPCLogger.h */,
+				FBF900BD19114017006DA11D /* DPCLogger.m */,
+				FB55EAC6190EAA2400636739 /* DPCSprite.h */,
+				FB55EAC7190EAA2400636739 /* DPCSprite.m */,
+				FB55EACA190EAA2400636739 /* DPCTextFactory.h */,
+				FB55EACB190EAA2400636739 /* DPCTextFactory.m */,
+				FB55EACC190EAA2400636739 /* DPCTextLabel.h */,
+				FB55EACD190EAA2400636739 /* DPCTextLabel.m */,
+				FB55EAAA190EAA2400636739 /* DPCChip.h */,
+				FB55EAAB190EAA2400636739 /* DPCChip.m */,
+				FB55EAAE190EAA2400636739 /* DPCChipStack.h */,
+				FB55EAAF190EAA2400636739 /* DPCChipStack.m */,
+				FB55EAAC190EAA2400636739 /* DPCChipCase.h */,
+				FB55EAAD190EAA2400636739 /* DPCChipCase.m */,
+				FB55EAA6190EAA2400636739 /* DPCCamera.h */,
+				FB55EAA7190EAA2400636739 /* DPCCamera.m */,
+				FB55EAA8190EAA2400636739 /* DPCCameraPosition.h */,
+				FB55EAA9190EAA2400636739 /* DPCCameraPosition.m */,
 				FB888B2C190E9672001FC737 /* AppDelegate.h */,
 				FB888B2D190E9672001FC737 /* AppDelegate.m */,
+				FB55EAB8190EAA2400636739 /* DPCGame.h */,
+				FB55EAB9190EAA2400636739 /* DPCGame.m */,
+				FB55EAD6190EAA2400636739 /* DPCWorldLayer.h */,
+				FB55EAD7190EAA2400636739 /* DPCWorldLayer.m */,
+				FB55EAD4190EAA2400636739 /* DPCWorldInput.h */,
+				FB55EAD5190EAA2400636739 /* DPCWorldInput.m */,
+				FB55EACE190EAA2400636739 /* DPCThisPlayer.h */,
+				FB55EACF190EAA2400636739 /* DPCThisPlayer.m */,
+				FB55EAC2190EAA2400636739 /* DPCPlayerNetwork.h */,
+				FB55EAC3190EAA2400636739 /* DPCPlayerNetwork.m */,
+				FB55EAC4190EAA2400636739 /* DPCPlayerNetworkService.h */,
+				FB55EAC5190EAA2400636739 /* DPCPlayerNetworkService.m */,
+				FB55EAB6190EAA2400636739 /* DPCDiscoveredTable.h */,
+				FB55EAB7190EAA2400636739 /* DPCDiscoveredTable.m */,
+				FB55EABA190EAA2400636739 /* DPCGameLogic.h */,
+				FB55EABB190EAA2400636739 /* DPCGameLogic.m */,
+				FB55EAD2190EAA2400636739 /* DPCUILayer.h */,
+				FB55EAD3190EAA2400636739 /* DPCUILayer.m */,
+				FB55EAD0190EAA2400636739 /* DPCUIInput.h */,
+				FB55EAD1190EAA2400636739 /* DPCUIInput.m */,
+				FB55EABC190EAA2400636739 /* DPCHomeMenu.h */,
+				FB55EABD190EAA2400636739 /* DPCHomeMenu.m */,
+				FB55EAB4190EAA2400636739 /* DPCDialogWindow.h */,
+				FB55EAB5190EAA2400636739 /* DPCDialogWindow.m */,
+				FB55EAB2190EAA2400636739 /* DPCDialog.h */,
+				FB55EAB3190EAA2400636739 /* DPCDialog.m */,
+				FB55EAB0190EAA2400636739 /* DPCClosedDialog.h */,
+				FB55EAB1190EAA2400636739 /* DPCClosedDialog.m */,
+				FB55EAA4190EAA2400636739 /* DPCBuyinDialog.h */,
+				FB55EAA5190EAA2400636739 /* DPCBuyinDialog.m */,
+				FB55EABE190EAA2400636739 /* DPCLeaveTableDialog.h */,
+				FB55EABF190EAA2400636739 /* DPCLeaveTableDialog.m */,
+				FB55EAC8190EAA2400636739 /* DPCTableStatusMenu.h */,
+				FB55EAC9190EAA2400636739 /* DPCTableStatusMenu.m */,
+				FB55EAC0190EAA2400636739 /* DPCPlayerEntry.h */,
+				FB55EAC1190EAA2400636739 /* DPCPlayerEntry.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1584,6 +1859,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Bidjee;
+				TargetAttributes = {
+					FB888880190E966F001FC737 = {
+						DevelopmentTeam = 8XRV642AGW;
+					};
+				};
 			};
 			buildConfigurationList = FB88887C190E966F001FC737 /* Build configuration list for PBXProject "DigitalPokerChipsIOS" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1608,28 +1888,64 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB55EB27190EBEB500636739 /* background_mt.png in Resources */,
+				FB55EB4B190EBEEA00636739 /* StoneSansSemiBooldItalic.ttf in Resources */,
 				FB8888A1190E966F001FC737 /* Default@2x.png in Resources */,
+				FB55EB4D190EBEEA00636739 /* table_highlight.png in Resources */,
+				FB55EB4A190EBEEA00636739 /* SegoePrint.ttf in Resources */,
 				FB8888B4190E9670001FC737 /* Icon-120.png in Resources */,
+				FB55EB3A190EBEB500636739 /* connection_blob.png in Resources */,
+				FB55EB2C190EBEB500636739 /* button_blue.png in Resources */,
 				FB888AB8190E9671001FC737 /* LICENSE_CCBReader.txt in Resources */,
+				FB55EB39190EBEB500636739 /* chip_2_2.png in Resources */,
+				FB55EB49190EBEEA00636739 /* ok_button.png in Resources */,
+				FB55EB36190EBEB500636739 /* chip_1_2.png in Resources */,
+				FB55EB33190EBEB500636739 /* chip_0_2.png in Resources */,
+				FB55EB22190EBEB500636739 /* arrow.png in Resources */,
 				FB8888AA190E9670001FC737 /* Icon@2x.png in Resources */,
+				FB55EB2D190EBEB500636739 /* button_red.png in Resources */,
+				FB55EB2B190EBEB500636739 /* button_bell_red.png in Resources */,
+				FB55EB32190EBEB500636739 /* chip_0_1.png in Resources */,
+				FB55EB48190EBEEA00636739 /* logo_dpc.png in Resources */,
+				FB55EB40190EBEBF00636739 /* fold_button.png in Resources */,
+				FB55EB38190EBEB500636739 /* chip_2_1.png in Resources */,
+				FB55EB3F190EBEBF00636739 /* dialog.png in Resources */,
 				FB8888BC190E9670001FC737 /* Icon-Small@2x.png in Resources */,
+				FB55EB2F190EBEB500636739 /* change.wav in Resources */,
+				FB55EB23190EBEB500636739 /* back.png in Resources */,
+				FB55EB28190EBEB500636739 /* background_rb.png in Resources */,
+				FB55EB29190EBEB500636739 /* background_rt.png in Resources */,
+				FB55EB25190EBEB500636739 /* background_lt.png in Resources */,
 				FB8888AE190E9670001FC737 /* Icon-72@2x.png in Resources */,
 				FB88889F190E966F001FC737 /* Default.png in Resources */,
 				FB8888A8190E9670001FC737 /* Icon.png in Resources */,
 				FB8888B6190E9670001FC737 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				FB8888A5190E9670001FC737 /* Default-Landscape~ipad.png in Resources */,
 				FB8888BA190E9670001FC737 /* Icon-Small.png in Resources */,
+				FB55EB35190EBEB500636739 /* chip_1_1.png in Resources */,
 				FB8888B8190E9670001FC737 /* Icon-Small-50.png in Resources */,
+				FB55EB4F190EBF5300636739 /* join_coin.png in Resources */,
 				FB888AA1190E9671001FC737 /* LICENSE_Kazmath.txt in Resources */,
+				FB55EB37190EBEB500636739 /* chip_2_0.png in Resources */,
+				FB55EB24190EBEB500636739 /* background_lb.png in Resources */,
 				FB8888AC190E9670001FC737 /* Icon-72.png in Resources */,
+				FB55EB31190EBEB500636739 /* chip_0_0.png in Resources */,
+				FB55EB3B190EBEB500636739 /* dealer_chip.png in Resources */,
 				FB8889FA190E9671001FC737 /* LICENSE_cocos2d.txt in Resources */,
+				FB55EB2E190EBEB500636739 /* cancel_button.png in Resources */,
+				FB55EB30190EBEB500636739 /* check.wav in Resources */,
 				FB8888A3190E9670001FC737 /* Default-568h@2x.png in Resources */,
 				FB8888C3190E9670001FC737 /* iTunesArtwork in Resources */,
+				FB55EB2A190EBEB500636739 /* bell.wav in Resources */,
+				FB55EB34190EBEB500636739 /* chip_1_0.png in Resources */,
 				FB8888BE190E9670001FC737 /* Icon-Spotlight-iOS7.png in Resources */,
 				FB8888B2190E9670001FC737 /* Icon-76@2x.png in Resources */,
 				FB888B26190E9672001FC737 /* LICENSE_Chipmunk.txt in Resources */,
 				FB8888C0190E9670001FC737 /* Icon-Spotlight-iOS7@2x.png in Resources */,
+				FB55EB26190EBEB500636739 /* background_mb.png in Resources */,
 				FB8888B0190E9670001FC737 /* Icon-76.png in Resources */,
+				FB55EB4C190EBEEA00636739 /* table_button.png in Resources */,
+				FB55EB41190EBEBF00636739 /* fold.wav in Resources */,
 				FB888A86190E9671001FC737 /* ChangeLog in Resources */,
 				FB8888C5190E9670001FC737 /* iTunesArtwork@2x in Resources */,
 			);
@@ -1642,9 +1958,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB55EB01190EBB9500636739 /* Reachability.h in Sources */,
+				FB55EB00190EBB5B00636739 /* Reachability.m in Sources */,
+				FB55EAE9190EAA2400636739 /* DPCLeaveTableDialog.m in Sources */,
+				FB55EAE7190EAA2400636739 /* DPCGameLogic.m in Sources */,
+				FB55EAE1190EAA2400636739 /* DPCChipStack.m in Sources */,
+				FB55EAEE190EAA2400636739 /* DPCTableStatusMenu.m in Sources */,
 				FB888933190E9670001FC737 /* CCParticleBatchNode.m in Sources */,
 				FB888AAB190E9671001FC737 /* CCBReader.m in Sources */,
 				FB888A5B190E9671001FC737 /* CCButton.m in Sources */,
+				FB55EAF2190EAA2400636739 /* DPCUIInput.m in Sources */,
 				FB888A06190E9671001FC737 /* OALAudioActions.m in Sources */,
 				FB888A4B190E9671001FC737 /* NSMutableArray+WeakReferences.m in Sources */,
 				FB8889C5190E9671001FC737 /* CCGLView.m in Sources */,
@@ -1652,9 +1975,11 @@
 				FB8888EB190E9670001FC737 /* CCAtlasNode.m in Sources */,
 				FB888A39190E9671001FC737 /* OpenALManager.m in Sources */,
 				FB888A45190E9671001FC737 /* IOSVersion.m in Sources */,
+				FB55EADC190EAA2400636739 /* DPCBuyinDialog.m in Sources */,
 				FB8888FA190E9670001FC737 /* CCDirector.m in Sources */,
 				FB888A65190E9671001FC737 /* CCScrollView.m in Sources */,
 				FB888958190E9670001FC737 /* CCResponder.m in Sources */,
+				FB55EAEC190EAA2400636739 /* DPCPlayerNetworkService.m in Sources */,
 				FB8888EF190E9670001FC737 /* CCClippingNode.m in Sources */,
 				FB888982190E9670001FC737 /* CCSpriteBatchNode.m in Sources */,
 				FB8889A6190E9670001FC737 /* CCTransition.m in Sources */,
@@ -1677,6 +2002,7 @@
 				FB8889A3190E9670001FC737 /* CCTMXXMLParser.m in Sources */,
 				FB8889E3190E9671001FC737 /* CGPointExtension.m in Sources */,
 				FB888A6E190E9671001FC737 /* CCTextField.m in Sources */,
+				FB55EAEA190EAA2400636739 /* DPCPlayerEntry.m in Sources */,
 				FB8889D9190E9671001FC737 /* CCProfiling.m in Sources */,
 				FB888A00190E9671001FC737 /* OALAction.m in Sources */,
 				FB888996190E9670001FC737 /* CCTexturePVR.m in Sources */,
@@ -1688,23 +2014,29 @@
 				FB8888E0190E9670001FC737 /* CCActionTween.m in Sources */,
 				FB888A4E190E9671001FC737 /* NSMutableDictionary+WeakReferences.m in Sources */,
 				FB88892B190E9670001FC737 /* CCNode+Debug.m in Sources */,
+				FB55EADF190EAA2400636739 /* DPCChip.m in Sources */,
 				FB8888E4190E9670001FC737 /* CCAnimation.m in Sources */,
 				FB888A8D190E9671001FC737 /* mat3.c in Sources */,
 				FB888999190E9670001FC737 /* CCTiledMap.m in Sources */,
+				FB55EAF5190EAA2400636739 /* DPCWorldLayer.m in Sources */,
 				FB888A5E190E9671001FC737 /* CCControl.m in Sources */,
 				FB8889E0190E9671001FC737 /* CCVertex.m in Sources */,
 				FB888A1C190E9671001FC737 /* ALBuffer.m in Sources */,
 				FB8889E9190E9671001FC737 /* NSThread+performBlock.m in Sources */,
+				FB55EAF0190EAA2400636739 /* DPCTextLabel.m in Sources */,
 				FB888974190E9670001FC737 /* CCShaderCache.m in Sources */,
 				FB888AB1190E9671001FC737 /* CCBSequenceProperty.m in Sources */,
 				FB8889B8190E9671001FC737 /* CCGLView.m in Sources */,
+				FB55EAE8190EAA2400636739 /* DPCHomeMenu.m in Sources */,
 				FB88897B190E9670001FC737 /* CCSprite.m in Sources */,
 				FB8888D7190E9670001FC737 /* CCActionInterval.m in Sources */,
 				FB888946190E9670001FC737 /* CCPhysicsJoint.m in Sources */,
 				FB888924190E9670001FC737 /* CCMotionStreak.m in Sources */,
 				FB8888D4190E9670001FC737 /* CCActionInstant.m in Sources */,
 				FB8889CE190E9671001FC737 /* base64.c in Sources */,
+				FB55EAEF190EAA2400636739 /* DPCTextFactory.m in Sources */,
 				FB888A0D190E9671001FC737 /* OALAudioTrack.m in Sources */,
+				FB55EAF7190EAA2400636739 /* GCDAsyncUdpSocket.m in Sources */,
 				FB888950190E9670001FC737 /* CCProgressNode.m in Sources */,
 				FB888943190E9670001FC737 /* CCPhysicsBody.m in Sources */,
 				FB8889C8190E9671001FC737 /* CCWindow.m in Sources */,
@@ -1713,16 +2045,20 @@
 				FB888A16190E9671001FC737 /* OALSimpleAudio.m in Sources */,
 				FB888908190E9670001FC737 /* CCGLProgram.m in Sources */,
 				FB888B2A190E9672001FC737 /* main.m in Sources */,
+				FBF900BE19114017006DA11D /* DPCLogger.m in Sources */,
 				FB888A3D190E9671001FC737 /* OALAudioSession.m in Sources */,
 				FB888AB4190E9671001FC737 /* CCBLocalizationManager.m in Sources */,
 				FB8889A0190E9670001FC737 /* CCTiledMapObjectGroup.m in Sources */,
 				FB888A9D190E9671001FC737 /* vec3.c in Sources */,
 				FB888920190E9670001FC737 /* CCLayoutBox.m in Sources */,
 				FB88891D190E9670001FC737 /* CCLayout.m in Sources */,
+				FB55EAF1190EAA2400636739 /* DPCThisPlayer.m in Sources */,
 				FB888A40190E9671001FC737 /* OALSuspendHandler.m in Sources */,
+				FB55EAE6190EAA2400636739 /* DPCGame.m in Sources */,
 				FB888A9F190E9671001FC737 /* vec4.c in Sources */,
 				FB8889B1190E9671001FC737 /* CCDirectorIOS.m in Sources */,
 				FB888988190E9670001FC737 /* CCSpriteFrameCache.m in Sources */,
+				FB55EAE5190EAA2400636739 /* DPCDiscoveredTable.m in Sources */,
 				FB888A47190E9671001FC737 /* mach_timing.c in Sources */,
 				FB888A2B190E9671001FC737 /* ALListener.m in Sources */,
 				FB888904190E9670001FC737 /* ccFPSImages.m in Sources */,
@@ -1730,6 +2066,7 @@
 				FB88894C190E9670001FC737 /* CCPhysicsShape.m in Sources */,
 				FB888954190E9670001FC737 /* CCRenderTexture.m in Sources */,
 				FB8888DA190E9670001FC737 /* CCActionManager.m in Sources */,
+				FB55EAF6190EAA2400636739 /* GCDAsyncSocket.m in Sources */,
 				FB88897E190E9670001FC737 /* CCSprite9Slice.m in Sources */,
 				FB888990190E9670001FC737 /* CCTextureAtlas.m in Sources */,
 				FB888A51190E9671001FC737 /* OALAudioFile.m in Sources */,
@@ -1738,16 +2075,24 @@
 				FB88899D190E9670001FC737 /* CCTiledMapLayer.m in Sources */,
 				FB888A91190E9671001FC737 /* neon_matrix_impl.c in Sources */,
 				FB888916190E9670001FC737 /* CCLabelTTF.m in Sources */,
+				FB55EAF4190EAA2400636739 /* DPCWorldInput.m in Sources */,
 				FB8889CB190E9671001FC737 /* NSEvent+CC.m in Sources */,
 				FB888A28190E9671001FC737 /* ALDevice.m in Sources */,
+				FB55EADE190EAA2400636739 /* DPCCameraPosition.m in Sources */,
 				FB888A9B190E9671001FC737 /* vec2.c in Sources */,
+				FB55EAED190EAA2400636739 /* DPCSprite.m in Sources */,
 				FB8888CB190E9670001FC737 /* CCAction.m in Sources */,
 				FB88892F190E9670001FC737 /* CCParallaxNode.m in Sources */,
 				FB888A97190E9671001FC737 /* ray2.c in Sources */,
+				FB55EAE4190EAA2400636739 /* DPCDialogWindow.m in Sources */,
 				FB888A13190E9671001FC737 /* OALAudioTracks.m in Sources */,
 				FB888A10190E9671001FC737 /* OALAudioTrackNotifications.m in Sources */,
+				FB55EAEB190EAA2400636739 /* DPCPlayerNetwork.m in Sources */,
 				FB888A95190E9671001FC737 /* quaternion.c in Sources */,
+				FB55EAE3190EAA2400636739 /* DPCDialog.m in Sources */,
 				FB888949190E9670001FC737 /* CCPhysicsNode.m in Sources */,
+				FB55EAE0190EAA2400636739 /* DPCChipCase.m in Sources */,
+				FB55EAE2190EAA2400636739 /* DPCClosedDialog.m in Sources */,
 				FB888A2F190E9671001FC737 /* ALSoundSourcePool.m in Sources */,
 				FB88893E190E9670001FC737 /* CCParticleSystemBase.m in Sources */,
 				FB8889D5190E9671001FC737 /* CCColor.m in Sources */,
@@ -1765,6 +2110,7 @@
 				FB888A99190E9671001FC737 /* utility.c in Sources */,
 				FB8889F8190E9671001FC737 /* ZipUtils.m in Sources */,
 				FB888A09190E9671001FC737 /* OALUtilityActions.m in Sources */,
+				FB55EADD190EAA2400636739 /* DPCCamera.m in Sources */,
 				FB8889B4190E9671001FC737 /* CCES2Renderer.m in Sources */,
 				FB888A84190E9671001FC737 /* aabb.c in Sources */,
 				FB888AAE190E9671001FC737 /* CCBsequence.m in Sources */,
@@ -1772,6 +2118,7 @@
 				FB8889AA190E9671001FC737 /* cocos2d.m in Sources */,
 				FB888A32190E9671001FC737 /* ALSource.m in Sources */,
 				FB88893A190E9670001FC737 /* CCParticleSystem.m in Sources */,
+				FB55EAF3190EAA2400636739 /* DPCUILayer.m in Sources */,
 				FB88895F190E9670001FC737 /* CCScene.m in Sources */,
 				FB88898D190E9670001FC737 /* CCTexture.m in Sources */,
 				FB888A1F190E9671001FC737 /* ALCaptureDevice.m in Sources */,
@@ -1912,7 +2259,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					armv7,
+					armv7s,
+				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1929,6 +2281,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1937,7 +2290,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					armv7,
+					armv7s,
+				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DigitalPokerChipsIOS/Supporting Files/Prefix.pch";
@@ -1953,6 +2311,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

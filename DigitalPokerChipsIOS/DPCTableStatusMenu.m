@@ -183,11 +183,21 @@
 }
 
 -(void)enableNudge:(NSString *)hostName {
-    
+    _bellButton.opacity=1;
+    _bellButton.touchable=YES;
+    _nudgeHostName=hostName;
+    for (int i=0;i<self.playerList.children.count;i++) {
+        DPCPlayerEntry* thisEntry=[self.playerList.children objectAtIndex:i];
+        if ([thisEntry.hostName isEqualToString:hostName]) {
+            float yBell=thisEntry.position.y;
+            _bellButton.position=ccp(xBellButtonCentreOffset,yBell);
+        }
+    }
 }
 
 -(void)disableNudge {
-    
+    _bellButton.opacity=0;
+    _bellButton.touchable=NO;
 }
 
 

@@ -136,7 +136,7 @@ withFilterContext:(id)filterContext {
 
 -(void)startReconnect:(NSData *)hostBytes_ reconnectString:(NSString *)connectString {
     CCLOG(@"DPCPlayerNetworkService - startReconnect");
-    connectState=CONNECT_STATE_NONE;
+    [self stopListen];
     [self disconnectCurrentGame];
     playerReconnectString=[NSString stringWithFormat:@"%@\n",connectString];
     hostBytes=hostBytes_;
@@ -173,6 +173,9 @@ withFilterContext:(id)filterContext {
     }
 }
 
+-(void)stopListen {
+    connectState=CONNECT_STATE_NONE;
+}
 
 -(void)socket:(GCDAsyncSocket*)sender didConnectToHost:(NSString *)host port:(uint16_t)port {
     CCLOG(@"DPCPlayerNetworkService - didConnectToHost");
@@ -252,8 +255,8 @@ withFilterContext:(id)filterContext {
 -(void) leaveTable:(NSString*)msg {
     
     [self sendToHost:msg];
-    connectState=CONNECT_STATE_NONE;
-    //stopReconnect();
+    [self stopListen];
+    [self stopReconnect];
     [self disconnectCurrentGame];
 }
 
