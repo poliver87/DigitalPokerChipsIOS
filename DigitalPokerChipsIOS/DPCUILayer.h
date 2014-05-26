@@ -55,7 +55,7 @@
 -(void)stopEnterPlayerName;
 -(void) startSearchForGames;
 -(void) stopSearchForGames;
--(void) startBuyin:(NSString*)tableName loadedGame:(BOOL)loadedGame;
+-(void) startBuyin:(NSString*)tableName;
 -(void) stopBuyin;
 -(void) startLeaveTableDialog:(NSString*)tableName;
 -(void) stopLeaveTableDialog;

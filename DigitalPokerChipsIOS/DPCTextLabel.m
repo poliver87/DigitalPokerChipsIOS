@@ -59,9 +59,11 @@
 }
 
 -(void)startFlashing {
-    flashing=YES;
-    if (_fadeState==fadeFadeNone) {
-        _fadeState=fadeFadeIn;
+    if (!flashing) {
+        flashing=YES;
+        if (_fadeState==fadeFadeNone) {
+            _fadeState=fadeFadeIn;
+        }
     }
 }
 

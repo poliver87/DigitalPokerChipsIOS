@@ -129,6 +129,10 @@
     return self;
 }
 
+-(NSString*)description {
+    return @"DPCUILayer";
+}
+
 -(void) resize:(CGSize) size {
     float screenWidth=[[CCDirector sharedDirector] viewSize].width;
     float screenHeight=[[CCDirector sharedDirector] viewSize].height;
@@ -289,14 +293,13 @@
     _searchingLabel.opacity=0;
 }
 
--(void) startBuyin:(NSString*)tableName loadedGame:(BOOL)loadedGame {
+-(void) startBuyin:(NSString*)tableName {
     _dialogWindow.opacity=1;
     [_dialogWindow setPosition:buyinDialogSmall.position];
     [_dialogWindow setRadiusX:buyinDialogSmall.xWindowRadius radiusY:buyinDialogSmall.yWindowRadius];
     [_dialogWindow sendTo:_buyinDialog];
     [_buyinDialog disappear];
     [_buyinDialog setTableName:tableName];
-    [_buyinDialog setLoadedGame:loadedGame];
     
     [_input pushTouchFocus:TOUCH_BUYIN];
 }
@@ -389,17 +392,9 @@
     [self.tableStatusMenu remove];
 }
 
--(BOOL)ccTouchBegan:(UITouch*)touch withEvent:(UIEvent*)event {
-    CGPoint touchPoint = [touch locationInView:[touch view]];
-    touchPoint = [[CCDirector sharedDirector] convertToGL:touchPoint];
-    CCLOG(@"touchPoint - x: %d y: %d",(int)touchPoint.x,(int)touchPoint.y);
-    return [_input touchDown:touchPoint];
-}
-
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchPoint = [touch locationInView:[touch view]];
     touchPoint = [[CCDirector sharedDirector] convertToGL:touchPoint];
-    CCLOG(@"touchPoint - x: %d y: %d",(int)touchPoint.x,(int)touchPoint.y);
     if (![_input touchDown:touchPoint]) {
         [super touchBegan:touch withEvent:event];
     }

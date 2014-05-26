@@ -48,8 +48,6 @@
         _worldWidth = 3*background_lb.contentSize.width;
         _worldHeight = 2*background_lb.contentSize.height;
         
-        [DPCLogger log:DEBUG_LOG_LIFECYCLE_TAG msg:[NSString stringWithFormat:@"WorldWidth: %d WorldHeight: %d",_worldWidth,_worldHeight]];
-        
         _input=[[DPCWorldInput alloc] init];
         
         [DPCChip setRadiusX:(int) (_worldWidth*0.02f)];
@@ -69,6 +67,9 @@
     return self;
 }
 
+-(NSString*)description {
+    return @"DPCWorldLayer";
+}
 
 -(void) initialiseCamera {
     [self sendCameraTo:_camPosHome];
@@ -211,7 +212,8 @@
 -(void)touchBegan:(UITouch*)touch withEvent:(UIEvent*)event {
     CGPoint touchPoint = [touch locationInView:[touch view]];
     touchPoint = [[CCDirector sharedDirector] convertToGL:touchPoint];
-    //touchPoint = [_mCamera convertScreenToWorld:touchPoint];
+    CCLOG(@" ");
+    CCLOG(@"World touch began");
     [_input touchDown:touchPoint];
 }
 
@@ -224,11 +226,13 @@
 -(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchPoint = [touch locationInView:[touch view]];
     touchPoint = [[CCDirector sharedDirector] convertToGL:touchPoint];
+    CCLOG(@"World touch ended");
     [_input touchUp:touchPoint];
 }
 
 -(BOOL)fling:(CGPoint)velocity {
     velocity = ccp(velocity.x,-1*velocity.y);
+    CCLOG(@"World fling");
     return [_input fling:velocity];
 }
 

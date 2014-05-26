@@ -11,6 +11,7 @@
 #import "DPCDiscoveredTable.h"
 #import "DPCChipStack.h"
 #import "DPCTextLabel.h"
+#import "DPCMovePrompt.h"
 
 @class CCTextField;
 @class DPCWorldLayer;
@@ -18,11 +19,13 @@
 
 extern NSString *const CONN_NONE;
 extern NSString *const CONN_IDLE;
+extern NSString *const CONN_SEARCH_HOLDOFF;
 extern NSString *const CONN_SEARCHING;
 extern NSString *const CONN_BUYIN;
 extern NSString *const CONN_CONNECTING;
 extern NSString *const CONN_CONNECTED;
-extern NSString *const CONN_SEARCH_HOLDOFF;
+extern NSString *const CONN_POLL_RECONNECT;
+extern NSString *const CONN_CONNECTED_NO_WIFI;
 
 @interface DPCThisPlayer : NSObject
 
@@ -63,7 +66,7 @@ extern NSString *const CONN_SEARCH_HOLDOFF;
 -(void)nameDone;
 -(BOOL)backPressed;
 -(void)updatePlayerName;
--(void)notifyTableFound:(DPCDiscoveredTable*)table loadedGame:(BOOL)loadedGame;
+-(void)notifyTableFound:(DPCDiscoveredTable*)table connectNow:(BOOL)connectNow;
 -(void)buyinDialogDone:(NSMutableArray*)chipNumbers;
 -(void)leaveDialogDone:(BOOL)actionCompleted;
 -(void)setPickedUpChip:(DPCChip*)newPUC;
@@ -77,10 +80,7 @@ extern NSString *const CONN_SEARCH_HOLDOFF;
 -(void)onStop;
 -(void)notifyConnectResult:(BOOL)result tableName:(NSString*) tableName;
 -(void)notifyConnectionLost;
--(void)notifyReconnected;
--(void)setupChips:(DPCChipStack*) setupStack color:(int) color;
--(void)promptMove:(int)betStake foldEnabled:(BOOL)foldEnabled message:(NSString*) message;
--(void)promptStateChange:(NSString*)messageStateChange stake:(int)stake foldEnabled:(BOOL)foldEnabled message:(NSString*) message;
+-(void)promptMove:(DPCMovePrompt*)movePrompt;
 -(void)stateChangeACKed;
 -(void)bellButtonPressed;
 -(void)setDealer:(BOOL)dealer;
@@ -95,5 +95,6 @@ extern NSString *const CONN_SEARCH_HOLDOFF;
 -(void)cancelMove;
 -(void)enableNudge:(NSString*)hostName;
 -(void)disableNudge;
+-(void)syncChipsToAmount:(int)newChipAmount;
 
 @end

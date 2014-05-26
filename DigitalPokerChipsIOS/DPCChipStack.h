@@ -39,5 +39,6 @@
 -(void)flashXYZ;
 -(CGPoint)getTopPosition;
 +(DPCChipStack*)parseStack:(NSString*)str;
+-(void)buildStackFrom:(NSArray*)build;
 
 @end

@@ -12,7 +12,7 @@
 
 @interface DPCTableStatusMenu : CCNode
 
-@property NSString* nudgeHostName;
+@property NSString* nudgeName;
 @property DPCSprite* background;
 @property (nonatomic) DPCTextLabel* tableName;
 @property DPCSprite* handle;

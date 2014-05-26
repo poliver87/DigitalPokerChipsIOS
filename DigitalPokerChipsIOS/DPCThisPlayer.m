@@ -16,18 +16,27 @@
 #import "DPCChipStack.h"
 #import "DPCGameLogic.h"
 #import "DPCLogger.h"
+#import "DPCMovePrompt.h"
+#import "DPCMove.h"
 
 NSString *const CONN_NONE=@"CONN_NONE";
 NSString *const CONN_IDLE=@"CONN_IDLE";
+NSString *const CONN_SEARCH_HOLDOFF=@"CONN_SEARCH_HOLDOFF";
 NSString *const CONN_SEARCHING=@"CONN_SEARCHING";
 NSString *const CONN_BUYIN=@"CONN_BUYIN";
 NSString *const CONN_CONNECTING=@"CONN_CONNECTING";
 NSString *const CONN_CONNECTED=@"CONN_CONNECTED";
-NSString *const CONN_SEARCH_HOLDOFF=@"CONN_SEARCH_HOLDOFF";
+NSString *const CONN_POLL_RECONNECT=@"CONN_POLL_RECONNECT";
+NSString *const CONN_CONNECTED_NO_WIFI=@"CONN_CONNECTED_NO_WIFI";
+
 
 int const DURATION_SEARCH_HOLDOFF = 2000;
+int const RECONNECT_INTERVAL = 3000;
 
 @interface DPCThisPlayer () {
+    
+    
+    
     DPCPlayerNetwork* networkInterface;
     DPCDiscoveredTable* connectingTable;
     CCNode* chips;
@@ -37,6 +46,8 @@ int const DURATION_SEARCH_HOLDOFF = 2000;
     BOOL foldEnabled;
     BOOL checkEnabled;
     BOOL isDealer;
+    DPCMovePrompt* pendingMovePrompt;
+    int chipAmount;
     
     BOOL waitingOnHost;
     
@@ -50,10 +61,13 @@ int const DURATION_SEARCH_HOLDOFF = 2000;
     CGPoint dealerButtonOffscreen;
     CGPoint dealerButtonOnscreen;
     int searchHoldoffTimer;
+    int reconnectTimer;
 }
 @end
 
 @implementation DPCThisPlayer
+
+static const NSString* LOG_TAG=@"DPCPlayer";
 
 ccColor3B colors[] = {{255,0,0},
     {0,255,0},
@@ -202,10 +216,16 @@ ccColor3B colors[] = {{255,0,0},
 
 -(void)animate:(float)delta {
     
-    if (_connectivityStatus==CONN_SEARCH_HOLDOFF) {
+    if ([_connectivityStatus isEqualToString:CONN_SEARCH_HOLDOFF]) {
         searchHoldoffTimer+=delta*1000;
         if (searchHoldoffTimer>DURATION_SEARCH_HOLDOFF) {
             [self notifyReadyToSearch];
+        }
+    } else if ([_connectivityStatus isEqualToString:CONN_POLL_RECONNECT]) {
+        reconnectTimer+=delta*1000;
+        if (reconnectTimer>=RECONNECT_INTERVAL) {
+            [networkInterface requestConnect:connectingTable azimuth:[DPCGame sharedGame].azimuth chipNumbers:nil];
+            reconnectTimer=0;
         }
     }
     [_joinToken animate:delta];
@@ -423,20 +443,35 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void) notifyReadyToSearch {
+    [DPCLogger log:LOG_TAG msg:@"notifyReadyToSearch"];
     DPCUILayer* mUIL=[[DPCGame sharedGame] getUILayer];
     if ([_connectivityStatus isEqualToString:CONN_IDLE]||[_connectivityStatus isEqualToString:CONN_SEARCH_HOLDOFF]) {
-        _connectivityStatus=CONN_SEARCHING;
-        [mUIL startSearchForGames];
-        [networkInterface startRequestGames];
+        if ([[DPCGame sharedGame].reachability isReachableViaWiFi]) {
+            _connectivityStatus=CONN_SEARCHING;
+            [mUIL startSearchForGames];
+            [networkInterface startRequestGames];
+        } else {
+            _connectivityStatus=CONN_IDLE;
+            [[[DPCGame sharedGame] getUILayer] startWifiPrompt];
+        }
+        
     }
 }
 
 -(void)searchHoldoff {
+    [DPCLogger log:LOG_TAG msg:@"searchHoldoff"];
     _connectivityStatus=CONN_SEARCH_HOLDOFF;
     searchHoldoffTimer=0;
 }
 
+-(void) startPollReconnect {
+    [DPCLogger log:LOG_TAG msg:@"startPollReconnect"];
+    _connectivityStatus=CONN_POLL_RECONNECT;
+    reconnectTimer=RECONNECT_INTERVAL;
+}
+
 -(void) stopSearchForGames {
+    [DPCLogger log:LOG_TAG msg:@"stopSearchForGames"];
     _connectivityStatus=CONN_IDLE;
     DPCUILayer* mUIL=[[DPCGame sharedGame] getUILayer];
     [mUIL stopSearchForGames];
@@ -444,6 +479,7 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void)sendJoinToken:(NSMutableArray*) chipNumbers {
+    [DPCLogger log:LOG_TAG msg:@"sendJoinToken"];
     _chipNumbers=chipNumbers;
     _sendingJoinToken=YES;
 }
@@ -451,6 +487,7 @@ ccColor3B colors[] = {{255,0,0},
 
 
 -(void)notifyLeftPlayerPosition {
+    [DPCLogger log:LOG_TAG msg:@"notifyLeftPlayerPosition"];
     DPCUILayer* mUIL=[[DPCGame sharedGame] getUILayer];
     [mUIL notifyLeftPlayerPosition];
     [mUIL stopWifiPrompt];
@@ -463,6 +500,7 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void)notifyAtPlayerPosition {
+    [DPCLogger log:LOG_TAG msg:@"notifyAtPlayerPosition"];
     DPCUILayer* mUIL=[[DPCGame sharedGame] getUILayer];
     DPCWorldLayer* mWL=[[DPCGame sharedGame] getWorldLayer];
     [mUIL notifyAtPlayerPosition];
@@ -481,9 +519,11 @@ ccColor3B colors[] = {{255,0,0},
             ((DPCChipStack*)[_mainStacks objectAtIndex:i]).totalShowing=YES;
         }
     }
+    chipAmount=[self calculateChipAmount];
 }
 
 -(void)notifyAtNamePosition {
+    [DPCLogger log:LOG_TAG msg:@"notifyAtNamePosition"];
     UIView *view = [[CCDirector sharedDirector] view];
     [view addSubview:_nameField];
     [_nameField becomeFirstResponder];
@@ -491,57 +531,73 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void)notifyLeftNamePosition {
+    [DPCLogger log:LOG_TAG msg:@"notifyLeftNamePosition"];
     [[[DPCGame sharedGame]getUILayer] stopEnterPlayerName];
 }
 
 -(BOOL)backPressed {
+    [DPCLogger log:LOG_TAG msg:@"backPressed"];
     BOOL playerFinished=true;
-    if (_connectivityStatus==CONN_NONE) {
+    if ([_connectivityStatus isEqualToString:CONN_NONE]) {
         
-    } else if (_connectivityStatus==CONN_IDLE) {
+    } else if ([_connectivityStatus isEqualToString:CONN_IDLE]) {
         
-    } else if (_connectivityStatus==CONN_SEARCHING) {
+    } else if ([_connectivityStatus isEqualToString:CONN_SEARCHING]) {
         [self stopSearchForGames];
-    } else if (_connectivityStatus==CONN_SEARCH_HOLDOFF) {
+    } else if ([_connectivityStatus isEqualToString:CONN_SEARCH_HOLDOFF]) {
         ;
-    } else if (_connectivityStatus==CONN_CONNECTING) {
-        // playerFinished=false;
-    } else if (_connectivityStatus==CONN_CONNECTED) {
+    } else if ([_connectivityStatus isEqualToString:CONN_CONNECTING]) {
+        playerFinished=false;
+    } else if ([_connectivityStatus isEqualToString:CONN_CONNECTED]) {
         [self doLeaveDialog];
+        playerFinished=false;
+    } else if ([_connectivityStatus isEqualToString:CONN_POLL_RECONNECT]) {
+        [self leaveTable];
+        playerFinished=false;
+    } else if ([_connectivityStatus isEqualToString:CONN_CONNECTED_NO_WIFI]) {
+        [self leaveTable];
         playerFinished=false;
     }
     return playerFinished;
 }
 
 -(void)updatePlayerName {
+    [DPCLogger log:LOG_TAG msg:@"updatePlayerName"];
     if (_nameLabel.contentSize.width<_plaqueRect.radiusX*1.3f) {
         _nameLabel.string=_nameField.text;
-        [networkInterface setName:_nameLabel.string];
     }
 }
 
 -(void)nameDone {
+    [DPCLogger log:LOG_TAG msg:@"nameDone"];
+    [networkInterface setName:_nameField.text];
     [_nameField endEditing:YES];
     [_nameField removeFromSuperview];
     DPCWorldLayer* mWL=[[DPCGame sharedGame] getWorldLayer];
     [mWL sendCameraTo:mWL.camPosPlayer];
 }
 
--(void)notifyTableFound:(DPCDiscoveredTable*)table loadedGame:(BOOL)loadedGame {
+-(void)notifyTableFound:(DPCDiscoveredTable*)table connectNow:(BOOL)connectNow {
+    [DPCLogger log:LOG_TAG msg:@"notifyTableFound"];
     if ([_connectivityStatus isEqualToString:CONN_SEARCHING]) {
-        _connectivityStatus=CONN_BUYIN;
         connectingTable=table;
         [self stopSearchForGames];
-        [self clearAllStacks];
         [[[DPCGame sharedGame] getWorldLayer].chipCase setValuesFromChipCase:table.chipCase];
-        [_joinToken fadeIn];
-        [_joinToken setPosition:joinTokenStart];
-        [[[DPCGame sharedGame] getUILayer] startBuyin:table.tableName loadedGame:loadedGame];
+        if (!connectNow) {
+            _connectivityStatus=CONN_BUYIN;
+            [self clearAllStacks];
+            [_joinToken fadeIn];
+            [_joinToken setPosition:joinTokenStart];
+            [[[DPCGame sharedGame] getUILayer] startBuyin:table.tableName];
+        } else {
+            _connectivityStatus=CONN_CONNECTING;
+            [networkInterface requestConnect:connectingTable azimuth:[DPCGame sharedGame].azimuth chipNumbers:nil];
+        }
     }
-    [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"table found"];
 }
 
 -(void)clearAllStacks {
+    [DPCLogger log:LOG_TAG msg:@"clearAllStacks"];
     [_mainStacks[CHIP_CASE_CHIP_A] clear];
     [_mainStacks[CHIP_CASE_CHIP_B] clear];
     [_mainStacks[CHIP_CASE_CHIP_C] clear];
@@ -551,6 +607,7 @@ ccColor3B colors[] = {{255,0,0},
     [_cancellingStack clear];
     [_cancelStack clear];
     _pickedUpChip=nil;
+    chipAmount=0;
 }
 
 -(void) enableBet {
@@ -581,6 +638,7 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void)notifyTableDisconnected {
+    [DPCLogger log:LOG_TAG msg:@"notifyTableDisconnected"];
     [self cancelMoveState];
     [self setDealer:false];
     waitingOnHost=false;
@@ -594,6 +652,7 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void)cancelMoveState {
+    [DPCLogger log:LOG_TAG msg:@"cancelMoveState"];
     [[[DPCGame sharedGame]getUILayer] stateChangeACKed];
     [self.connectionBlob fadeOut];
     _connectionBlob.opacity=0;
@@ -604,6 +663,7 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void)buyinDialogDone:(NSMutableArray*)chipNumbers {
+    [DPCLogger log:LOG_TAG msg:@"buyinDialogDone"];
     [[[DPCGame sharedGame] getUILayer] stopBuyin];
     if (chipNumbers!=nil) {
         [self sendJoinToken:chipNumbers];
@@ -626,12 +686,14 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void)leaveTable {
-    if (_connectivityStatus==CONN_CONNECTED) {
+    [DPCLogger log:LOG_TAG msg:@"leaveTable"];
+    if ([_connectivityStatus isEqualToString:CONN_CONNECTED]||[_connectivityStatus isEqualToString:CONN_POLL_RECONNECT]||
+        [_connectivityStatus isEqualToString:CONN_CONNECTED_NO_WIFI]) {
+        _connectivityStatus=CONN_IDLE;
         [networkInterface leaveTable];
         [self notifyTableDisconnected];
         [self searchHoldoff];
     }
-    [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"leaveTable"];
 }
 
 -(void) setPickedUpChip:(DPCChip*)newPUC {
@@ -724,9 +786,11 @@ ccColor3B colors[] = {{255,0,0},
     }
     
     if (flung) {
+        CCLOG(@"PUC Flung");
         [self addBetChip:_pickedUpChip];
         _pickedUpChip=nil;
     } else {
+        CCLOG(@"PUC not Flung");
         [self doPickedUpChipDropped];
     }
 }
@@ -734,12 +798,14 @@ ccColor3B colors[] = {{255,0,0},
 -(void)addBetChip:(DPCChip*) chip {
     int numTop=MIN(_betStack.size+_bettingStack.size,_betStack.maxRenderNum);
     [chip setDest:ccp(_betStack.position.x,_betStack.position.y)];
+    CCLOG(@"sent PUC to (%d,%d)",(int)chip.destination.x,(int)chip.destination.y);
     chip.zDest=numTop;
     [_bettingStack addChip:chip];
     [_checkButton fadeOut];
     _checkButton.touchable=NO;
-    //mWL.game.mFL.foldButton.fadeOut();
-    //mWL.game.mFL.foldButton.setTouchable(false);
+    DPCUILayer* mUIL=[[DPCGame sharedGame]getUILayer];
+    [mUIL.foldButton fadeOut];
+    mUIL.foldButton.touchable=NO;
 }
 
 -(void) initiateCancelFromStack:(DPCChipStack*) stack {
@@ -772,8 +838,14 @@ ccColor3B colors[] = {{255,0,0},
         chipCount[thisChip.chipType]=@([chipCount[thisChip.chipType] intValue]+1);
         [_cancellingStack addChip:thisChip];
     }
+    [stack clear];
     [stack updateTotalLabel];
     
+    if (foldEnabled) {
+        DPCUILayer* mUIL=[[DPCGame sharedGame]getUILayer];
+        [mUIL.foldButton fadeIn];
+        mUIL.foldButton.touchable=YES;
+    }
     if (checkEnabled) {
         [_checkButton fadeIn];
         _checkButton.touchable=YES;
@@ -783,7 +855,8 @@ ccColor3B colors[] = {{255,0,0},
 -(void) doFold {
     if (!waitingOnHost) {
         [[OALSimpleAudio sharedInstance] playEffect:@"fold.wav"];
-        [networkInterface submitMove:MOVE_FOLD chipString:@""];
+        DPCMove* thisMove=[[DPCMove alloc]initWithMoveType:MOVE_FOLD chipString:@""];
+        [self sendMove:thisMove];
         [self disableBet];
         [self disableCheck];
         [self disableFold];
@@ -795,7 +868,8 @@ ccColor3B colors[] = {{255,0,0},
 -(void) doCheck {
     if (!waitingOnHost) {
         [[OALSimpleAudio sharedInstance] playEffect:@"check.wav"];
-        [networkInterface submitMove:MOVE_CHECK chipString:@""];
+        DPCMove* thisMove=[[DPCMove alloc]initWithMoveType:MOVE_CHECK chipString:@""];
+        [self sendMove:thisMove];
         [self disableBet];
         [self disableCheck];
         [self disableFold];
@@ -804,102 +878,114 @@ ccColor3B colors[] = {{255,0,0},
     }
 }
 
+-(void)sendMove:(DPCMove*)move {
+    [networkInterface submitMove:move.moveType chipString:move.chipString];
+}
+
 -(void) wifiOn {
+    [DPCLogger log:LOG_TAG msg:@"wifiOn"];
+    [networkInterface setWifiEnabled:YES];
     DPCUILayer* mUIL=[[DPCGame sharedGame] getUILayer];
-    if (_connectivityStatus==CONN_IDLE) {
+    if ([_connectivityStatus isEqualToString:CONN_IDLE]) {
         [mUIL stopWifiPrompt];
         [self notifyReadyToSearch];
-    } else if (_connectivityStatus==CONN_CONNECTED) {
+    } else if ([_connectivityStatus isEqualToString:CONN_CONNECTED_NO_WIFI]) {
         [mUIL stopWifiPrompt];
+        [mUIL startReconnect];
+        [self startPollReconnect];
     }
-    [networkInterface setWifiEnabled:YES];
 }
 
 -(void) wifiOff {
+    [DPCLogger log:LOG_TAG msg:@"wifiOff"];
     DPCUILayer* mUIL=[[DPCGame sharedGame] getUILayer];
-    if (_connectivityStatus==CONN_IDLE) {
+    [networkInterface setWifiEnabled:NO];
+    if ([_connectivityStatus isEqualToString:CONN_IDLE]) {
         [mUIL startWifiPrompt];
-    } else if (_connectivityStatus==CONN_SEARCHING) {
+    } else if ([_connectivityStatus isEqualToString:CONN_SEARCH_HOLDOFF]) {
+        [mUIL startWifiPrompt];
+    } else if ([_connectivityStatus isEqualToString:CONN_SEARCHING]) {
         [self stopSearchForGames];
         [mUIL startWifiPrompt];
-    } else if (_connectivityStatus==CONN_CONNECTED) {
+    } else if ([_connectivityStatus isEqualToString:CONN_BUYIN]) {
+        [self cancelBuyin];
+        [mUIL startWifiPrompt];
+    } else if ([_connectivityStatus isEqualToString:CONN_CONNECTING]) {
+        _connectivityStatus=CONN_IDLE;
+        [networkInterface stopListen];
+        [mUIL startWifiPrompt];
+    } else if ([_connectivityStatus isEqualToString:CONN_CONNECTED]) {
+        _connectivityStatus=CONN_CONNECTED_NO_WIFI;
+        [networkInterface stopListen];
+        waitingOnHost=true;
+        [self cancelMoveState];
+        [mUIL startWifiPrompt];
+    } else if ([_connectivityStatus isEqualToString:CONN_POLL_RECONNECT]) {
+        _connectivityStatus=CONN_CONNECTED_NO_WIFI;
+        [mUIL stopReconnect];
         [mUIL startWifiPrompt];
     }
-    [networkInterface setWifiEnabled:NO];
 }
 
 -(void)onStart {
+    [DPCLogger log:LOG_TAG msg:@"onStart"];
     [networkInterface onStart];
 }
 
 -(void)onStop {
+    [DPCLogger log:LOG_TAG msg:@"onStop"];
     [networkInterface onStop];
 }
 
 -(void) notifyConnectResult:(BOOL)result tableName:(NSString*) tableName {
+    [DPCLogger log:LOG_TAG msg:@"notifyConnectResult"];
     if (result) {
         _connectivityStatus=CONN_CONNECTED;
         _tableName=tableName;
         _plaqueRect.touchable=NO;
-        [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"connect attempt success"];
+        DPCUILayer* mUIL=[[DPCGame sharedGame]getUILayer];
+        [mUIL stopReconnect];
+        [mUIL showTableStatusMenu:tableName];
+        waitingOnHost=false;
     } else {
-        _connectivityStatus=CONN_IDLE;
-        [self searchHoldoff];
-        [[[DPCGame sharedGame]getUILayer] stopBuyin];
-        [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"connect attempt failed"];
+        if ([_connectivityStatus isEqualToString:CONN_CONNECTING]) {
+            [self cancelBuyin];
+        }
     }
-    connectingTable=nil;
 }
 
 -(void)notifyConnectionLost {
-    waitingOnHost=true;
-    [self cancelMoveState];
-    [[[DPCGame sharedGame] getUILayer] startReconnect];
-    [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"connectionn lost"];
-}
-
--(void)notifyReconnected {
-    waitingOnHost=NO;
-    [[[DPCGame sharedGame] getUILayer] stopReconnect];
-    [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"reconnected"];
+    [DPCLogger log:LOG_TAG msg:@"notifyConnectionLost"];
+    if ([_connectivityStatus isEqualToString:CONN_CONNECTED]) {
+        waitingOnHost=true;
+        [self cancelMoveState];
+        [[[DPCGame sharedGame] getUILayer] startReconnect];
+        [self startPollReconnect];
+    }
 }
 
 -(void) submitBet {
-    int move;
+    [DPCLogger log:LOG_TAG msg:@"submitBet"];
+    int moveType;
     if (![self isAllIn]) {
-        move=MOVE_BET;
+        moveType=MOVE_BET;
     } else {
-        move=MOVE_ALL_IN;
+        moveType=MOVE_ALL_IN;
     }
-    [networkInterface submitMove:move chipString:[_betStack description]];
-     [_betStack clear];
-     _betStack.position=betStackOrigin;
-     [self disableBet];
-     [self disableCheck];
-     [self disableFold];
-     [[[DPCGame sharedGame]getUILayer] hideTextMessage];
-     [_connectionBlob fadeOut];
-}
-
--(void) setupChips:(DPCChipStack*) setupStack color:(int) color {
-    [self clearAllStacks];
-    for (int i=0;i<CHIP_CASE_CHIP_TYPES;i++) {
-        DPCChipStack* thisStack=[_mainStacks objectAtIndex:i];
-        thisStack.opacity=1;
-    }
-    self.betStack.opacity=1;
-    self.bettingStack.opacity=1;
-    self.cancellingStack.opacity=1;
-    self.cancelStack.opacity=1;
-    self.bettingStack.opacity=1;
-    [self doWin:setupStack];
-    self.connectionBlob.color=[CCColor colorWithCcColor3b:colors[color]];
-    DPCUILayer* mUIL=[[DPCGame sharedGame]getUILayer];
-    [mUIL showTableStatusMenu:_tableName];
-    [mUIL stopWaitNextHand];
+    DPCMove* thisMove=[[DPCMove alloc] initWithMoveType:moveType chipString:[_betStack description]];
+    [self sendMove:thisMove];
+    chipAmount-=_betStack.value;
+    [_betStack clear];
+    _betStack.position=betStackOrigin;
+    [self disableBet];
+    [self disableCheck];
+    [self disableFold];
+    [[[DPCGame sharedGame]getUILayer] hideTextMessage];
+    [_connectionBlob fadeOut];
 }
 
 -(void) doWin:(DPCChipStack*) winStack {
+    [DPCLogger log:LOG_TAG msg:@"doWin"];
     int chipCount[]={0,0,0};
     for (int i=0;i<winStack.size;i++) {
         DPCChip* thisChip=[winStack getChip:i];
@@ -915,6 +1001,7 @@ ccColor3B colors[] = {{255,0,0},
         [chips addChild:thisChip];
         [_cancellingStack addChip:thisChip];
     }
+    chipAmount+=_cancellingStack.value;
     if (_pickedUpChip!=nil) {
         DPCChipStack* thisStack=[_mainStacks objectAtIndex:_pickedUpChip.chipType];
         float newZ=thisStack.renderSize+_cancellingStack.size;
@@ -922,46 +1009,48 @@ ccColor3B colors[] = {{255,0,0},
             _pickedUpChip.zDest=newZ;
         }
     }
+    [[[DPCGame sharedGame]getUILayer] stopWaitNextHand];
 }
 
--(void) promptMove:(int)stake foldEnabled:(BOOL)foldEnabled_ message:(NSString*) message {
-    if (foldEnabled_) {
-        [self enableFold];
-    }
-    if (stake==0) {
-        [self enableCheck];
-        if (_betStack.size>0) {
-            _checkButton.touchable=NO;
-            [_checkButton fadeOut];
+-(void) promptMove:(DPCMovePrompt*)movePrompt {
+    [DPCLogger log:LOG_TAG msg:@"promptMove"];
+    if (movePrompt.messageStateChange.length==0) {
+        if (movePrompt.foldEnabled) {
+            [self enableFold];
         }
+        if (movePrompt.stake==0) {
+            [self enableCheck];
+            if (_betStack.size>0) {
+                _checkButton.touchable=NO;
+                [_checkButton fadeOut];
+            }
+        }
+        [self enableBet];
+        betStake=movePrompt.stake;
+        [[OALSimpleAudio sharedInstance] playEffect:@"bell.wav"];
+        [self textMessage:movePrompt.message];
+        [_connectionBlob fadeIn];
+    } else {
+        [[[DPCGame sharedGame] getUILayer] promptStateChange:movePrompt.messageStateChange];
+        movePrompt.messageStateChange=@"";
+        pendingMovePrompt=movePrompt;
     }
-    [self enableBet];
-    betStake=stake;
-    [[OALSimpleAudio sharedInstance] playEffect:@"bell.wav"];
-    [self textMessage:message];
-    [_connectionBlob fadeIn];
-}
-
--(void) promptStateChange:(NSString*)messageStateChange stake:(int)stake foldEnabled:(BOOL)foldEnabled_ message:(NSString*) message {
-    DPCUILayer* mUIL=[[DPCGame sharedGame]getUILayer] ;
-    [mUIL promptStateChange:messageStateChange];
-    betStake=stake;
-    foldEnabled=foldEnabled_;
-    mUIL.playerPrompt.string=message;
 }
 
 -(void) stateChangeACKed {
+    [DPCLogger log:LOG_TAG msg:@"stateChangeACKed"];
      DPCUILayer* mUIL=[[DPCGame sharedGame]getUILayer] ;
     [mUIL stateChangeACKed];
-    [self promptMove:betStake foldEnabled:foldEnabled message:mUIL.playerPrompt.string];
+    [self promptMove:pendingMovePrompt];
 }
 
 -(void)bellButtonPressed {
-    NSString* hostName=[[DPCGame sharedGame]getUILayer].tableStatusMenu.nudgeHostName;
-    [networkInterface sendBell:hostName];
+    NSString* name=[[DPCGame sharedGame]getUILayer].tableStatusMenu.nudgeName;
+    [networkInterface sendBell:name];
 }
 
 -(void) textMessage:(NSString*) message {
+    [DPCLogger log:LOG_TAG msg:@"textMessage"];
     if ([message length]==0) {
         [[[DPCGame sharedGame] getUILayer] hideTextMessage];
     } else {
@@ -970,6 +1059,7 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void) setDealer:(BOOL)isDealer_ {
+    [DPCLogger log:LOG_TAG msg:@"setDealer"];
     isDealer=isDealer_;
     if (isDealer) {
         _dealerButton.opacity=1;
@@ -977,27 +1067,31 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void) showConnection {
+    [DPCLogger log:LOG_TAG msg:@"showConnection"];
     [_connectionBlob fadeIn];
 }
 
 -(void) hideConnection {
+    [DPCLogger log:LOG_TAG msg:@"hideConnection"];
     [_connectionBlob fadeOut];
 }
 
 -(void)notifyBootedByHost {
-    if (_connectivityStatus==CONN_CONNECTED) {
+    [DPCLogger log:LOG_TAG msg:@"notifyBootedByHost"];
+    if ([_connectivityStatus isEqualToString:CONN_CONNECTED]) {
         _connectivityStatus=CONN_IDLE;
         [self notifyTableDisconnected];
         [self notifyReadyToSearch];
     }
-    [DPCLogger log:DEBUG_LOG_PLAYER_TAG msg:@"booted by host"];
 }
 
 -(void) notifyWaitNextHand {
+    [DPCLogger log:LOG_TAG msg:@"notifyWaitNextHand"];
     [[[DPCGame sharedGame]getUILayer] startWaitNextHand];
 }
 
 -(void)syncStatusMenu:(NSMutableArray *)playerList {
+    [DPCLogger log:LOG_TAG msg:@"syncStatusMenu"];
     [[[DPCGame sharedGame]getUILayer].tableStatusMenu syncStatusMenu:playerList];
 }
 
@@ -1006,15 +1100,55 @@ ccColor3B colors[] = {{255,0,0},
 }
 
 -(void)cancelMove {
+    [DPCLogger log:LOG_TAG msg:@"cancelMove"];
     [self cancelMoveState];
 }
 
--(void)enableNudge:(NSString*)hostName {
-    [[[DPCGame sharedGame]getUILayer].tableStatusMenu enableNudge:hostName];
+-(void)enableNudge:(NSString*)name {
+    [[[DPCGame sharedGame]getUILayer].tableStatusMenu enableNudge:name];
 }
 
 -(void)disableNudge {
     [[[DPCGame sharedGame]getUILayer].tableStatusMenu disableNudge];
+}
+
+-(void)syncChipsToAmount:(int)newChipAmount {
+    [DPCLogger log:LOG_TAG msg:@"syncChipsToAmount"];
+    int difference=newChipAmount-chipAmount;
+    if (difference>0) {
+        DPCChipStack* syncStack=[[DPCChipStack alloc]init];
+        NSArray* simplestBuild=[[[DPCGame sharedGame] getWorldLayer].chipCase calculateSimplestBuild:difference];
+        [syncStack buildStackFrom:simplestBuild];
+        [self doWin:syncStack];
+    } else if (difference<0) {
+        [self clearAllStacks];
+        DPCChipStack* syncStack=[[DPCChipStack alloc]init];
+        NSArray* simplestBuild=[[[DPCGame sharedGame] getWorldLayer].chipCase calculateSimplestBuild:newChipAmount];
+        [syncStack buildStackFrom:simplestBuild];
+        [self doWin:syncStack];
+    }
+}
+
+-(int)calculateChipAmount {
+    [DPCLogger log:LOG_TAG msg:@"calculateChipAmount"];
+    int amount=0;
+    for (int i=0;i<CHIP_CASE_CHIP_TYPES;i++) {
+        DPCChipStack* thisStack=[_mainStacks objectAtIndex:i];
+        amount+=thisStack.value;
+    }
+    amount+=_bettingStack.value;
+    amount+=_betStack.value;
+    amount+=_cancellingStack.value;
+    amount+=_cancelStack.value;
+    return amount;
+}
+
+-(void) cancelBuyin {
+    [DPCLogger log:LOG_TAG msg:@"cancelBuyin"];
+    [_joinToken fadeOut];
+    _connectivityStatus=CONN_IDLE;
+    [self searchHoldoff];
+    [[[DPCGame sharedGame] getUILayer] stopBuyin];
 }
 
 @end

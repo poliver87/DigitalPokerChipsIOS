@@ -43,9 +43,9 @@ static const int CONNECT_STATE_SOCKET_CONNECTING = 2;
 static const int CONNECT_STATE_READ_TABLE_INFO = 3;
 static const int CONNECT_STATE_READ_ACK = 4;
 static const int CONNECT_STATE_CONNECTED = 5;
-static const int RECONNECT_STATE_POLL = 6;
-static const int RECONNECT_STATE_READ_TABLE_INFO = 7;
-static const int RECONNECT_STATE_READ_ACK = 8;
+static const int CONNECT_STATE_LISTENING = 6;
+
+static const NSString* LOG_TAG = @"DPCPlayerNetwork";
 
 -(id) init {
     if (self=[super init]) {
@@ -62,7 +62,6 @@ static const int RECONNECT_STATE_READ_ACK = 8;
 }
 
 -(void) stopDiscover {
-    CCLOG(@"DPCPlayerNetworkService - stopDiscover");
     discoverState=DISCOVER_STATE_NONE;
     [broadcastTimer invalidate];
     [udpSocket setDelegate:nil];
@@ -71,7 +70,6 @@ static const int RECONNECT_STATE_READ_ACK = 8;
 }
 
 -(void) startDiscover:(NSString*)playerAnnounceStr_ {
-    CCLOG(@"DPCPlayerNetworkService - startDiscover");
     playerAnnounceStr=playerAnnounceStr_;
     struct ifaddrs *ifa = NULL,*ifList;
     getifaddrs(&ifList);
@@ -102,7 +100,6 @@ static const int RECONNECT_STATE_READ_ACK = 8;
 }
 
 -(void)findTables:(NSTimer*)theTimer {
-    CCLOG(@"DPCPlayerNetworkService - findTables");
     if (discoverState==DISCOVER_STATE_DISCOVERING) {
         NSData *data=[playerAnnounceStr dataUsingEncoding:NSUTF8StringEncoding];
         [udpSocket sendData:data toHost:broadcastAddrStr port:11111 withTimeout:2 tag:0];
@@ -114,15 +111,12 @@ static const int RECONNECT_STATE_READ_ACK = 8;
 withFilterContext:(id)filterContext {
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (discoverState==DISCOVER_STATE_DISCOVERING) {
-        if ([_playerNetwork validateTableInfo:msg]) {
-            [_playerNetwork notifyTableFound:address rxMsg:msg];
-        }
+        [_playerNetwork discoverResponseRxd:address rxMsg:msg];
     }
 }
 
 
 -(void) playerConnect:(NSData *)hostBytes_ connectString:(NSString *)connectString {
-    CCLOG(@"DPCPlayerNetworkService - playerConnect");
     hostBytes=hostBytes_;
     playerConnectString=[NSString stringWithFormat:@"%@\n",connectString];
     [commsSocket setDelegate:self];
@@ -134,58 +128,19 @@ withFilterContext:(id)filterContext {
     }
 }
 
--(void)startReconnect:(NSData *)hostBytes_ reconnectString:(NSString *)connectString {
-    CCLOG(@"DPCPlayerNetworkService - startReconnect");
-    [self stopListen];
-    [self disconnectCurrentGame];
-    playerReconnectString=[NSString stringWithFormat:@"%@\n",connectString];
-    hostBytes=hostBytes_;
-    commsSocket.delegate=self;
-    connectState=RECONNECT_STATE_POLL;
-    [self attemptReconnect];
-}
-
--(void)attemptReconnect {
-    NSError *error=nil;
-    if (connectState==RECONNECT_STATE_POLL) {
-        [commsSocket connectToHost:[GCDAsyncSocket hostFromAddress:hostBytes] onPort:11114 error:&error];
-    }
-}
-
--(void)reconnectFailed {
-    CCLOG(@"DPCPlayerNetworkService - reconnectFailed");
-    if (connectState==RECONNECT_STATE_POLL||
-        connectState==RECONNECT_STATE_READ_TABLE_INFO||
-        connectState==RECONNECT_STATE_READ_ACK) {
-        [self sendToHost:@"<GOODBYE/>"];
-        connectState=RECONNECT_STATE_POLL;
-    }
-    if (connectState==RECONNECT_STATE_POLL) {
-        [self performSelector:@selector(attemptReconnect) withObject:nil afterDelay:4];
-    }
-}
-
--(void)stopReconnect {
-    CCLOG(@"DPCPlayerNetworkService - reconnectFailed");
-    connectState=CONNECT_STATE_NONE;
-    if (commsSocket!=nil) {
-        [commsSocket disconnect];
-    }
-}
-
 -(void)stopListen {
     connectState=CONNECT_STATE_NONE;
 }
 
+-(void)startListen {
+    connectState=CONNECT_STATE_LISTENING;
+}
+
 -(void)socket:(GCDAsyncSocket*)sender didConnectToHost:(NSString *)host port:(uint16_t)port {
-    CCLOG(@"DPCPlayerNetworkService - didConnectToHost");
     if ([host isEqualToString:[GCDAsyncSocket hostFromAddress:hostBytes]]) {
         if (connectState==CONNECT_STATE_SOCKET_CONNECTING) {
             connectState=CONNECT_STATE_READ_TABLE_INFO;
             [commsSocket readDataToData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:3 tag:1];
-        } else if (connectState==RECONNECT_STATE_POLL) {
-            connectState=RECONNECT_STATE_READ_TABLE_INFO;
-            [commsSocket readDataToData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:4 tag:1];
         }
     }
 }
@@ -196,7 +151,6 @@ withFilterContext:(id)filterContext {
     if (newlineLocation!=NSNotFound) {
         msg=[msg substringToIndex:newlineLocation];
         if (connectState==CONNECT_STATE_READ_TABLE_INFO) {
-            CCLOG(@"DPCPlayerNetworkService - didReadData: %@",msg);
             if ([_playerNetwork validateTableInfo:msg]) {
                 tableInfoString=msg;
                 [commsSocket writeData:[playerConnectString dataUsingEncoding:NSUTF8StringEncoding] withTimeout:5 tag:1];
@@ -206,7 +160,6 @@ withFilterContext:(id)filterContext {
                 [self connectFailed];
             }
         } else if (connectState==CONNECT_STATE_READ_ACK) {
-            CCLOG(@"DPCPlayerNetworkService - didReadData: %@",msg);
             if ([_playerNetwork validateTableACK:msg]) {
                 connectState=CONNECT_STATE_CONNECTED;
                 [commsSocket readDataToData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:8 tag:1];
@@ -214,49 +167,25 @@ withFilterContext:(id)filterContext {
             } else if ([msg rangeOfString:@"<DPC_CONNECTION_UNSUCCESSFUL/>"].location!=NSNotFound) {
                 [self connectFailed];
             }
-        } else if (connectState==CONNECT_STATE_CONNECTED) {
+        } else if (connectState==CONNECT_STATE_LISTENING) {
             [_playerNetwork parseGameMessage:msg];
             [commsSocket readDataToData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:8 tag:1];
-        } else if (connectState==RECONNECT_STATE_READ_TABLE_INFO) {
-            if ([_playerNetwork validateReconnectTableInfo:msg]) {
-                [commsSocket writeData:[playerReconnectString dataUsingEncoding:NSUTF8StringEncoding] withTimeout:5 tag:1];
-                [commsSocket readDataToData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:5 tag:1];
-                connectState=RECONNECT_STATE_READ_ACK;
-            } else {
-                [self reconnectFailed];
-            }
-        } else if (connectState==RECONNECT_STATE_READ_ACK) {
-            CCLOG(@"DPCPlayerNetworkService - didReadData: %@",msg);
-            if ([_playerNetwork validateReconnectACK:msg]) {
-                connectState=CONNECT_STATE_CONNECTED;
-                [commsSocket readDataToData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:8 tag:1];
-                [_playerNetwork notifyReconnected];
-            } else {
-                [self reconnectFailed];
-            }
-        
         } else {
-            CCLOG(@"DPCPlayerNetworkService - didReadData: %@",msg);
             [commsSocket readDataToData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:5 tag:1];
         }
     } else {
         [commsSocket readDataToData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:5 tag:1];
-        CCLOG(@"DPCPlayerNetworkService - didReadData: %@",msg);
-        CCLOG(@"Error: read data with a newline");
     }
 }
 
 -(void) sendToHost:(NSString*) msg {
-    CCLOG(@"DPCPlayerNetworkService - sendToHost: %@",msg);
     msg=[NSString stringWithFormat:@"%@\n",msg];
     [commsSocket writeData:[msg dataUsingEncoding:NSUTF8StringEncoding] withTimeout:5 tag:1];
 }
 
 -(void) leaveTable:(NSString*)msg {
-    
     [self sendToHost:msg];
     [self stopListen];
-    [self stopReconnect];
     [self disconnectCurrentGame];
 }
 
@@ -268,34 +197,28 @@ withFilterContext:(id)filterContext {
 }
 
 -(NSTimeInterval)socket:(GCDAsyncSocket*)sock shouldTimeoutReadWithTag:(long)tag elapsed:(NSTimeInterval)elapsed bytesDone:(NSUInteger)length {
-    CCLOG(@"DPCPlayerNetworkService - shouldTimeoutReadWithTag");
     if (connectState==CONNECT_STATE_NONE||
         connectState==CONNECT_STATE_SOCKET_CONNECTING||
         connectState==CONNECT_STATE_READ_TABLE_INFO||
         connectState==CONNECT_STATE_READ_ACK) {
         [self connectFailed];
-    } else if (connectState==CONNECT_STATE_CONNECTED) {
-        [_playerNetwork startReconnect];
-    } else if (connectState==RECONNECT_STATE_POLL||
-               connectState==RECONNECT_STATE_READ_TABLE_INFO||
-               connectState==RECONNECT_STATE_READ_ACK) {
-        [self reconnectFailed];
+    } else if (connectState==CONNECT_STATE_CONNECTED||
+               connectState==CONNECT_STATE_LISTENING) {
+        [self disconnectCurrentGame];
+        [_playerNetwork notifyConnectionLost];
     }
     return 0;
 }
 
 -(void)socketDidDisconnect:(GCDAsyncSocket*)sock withError:(NSError*)error {
-    CCLOG(@"DPCPlayerNetworkService - socketDidDisconnect");
     if (connectState==CONNECT_STATE_SOCKET_CONNECTING||
         connectState==CONNECT_STATE_READ_TABLE_INFO||
         connectState==CONNECT_STATE_READ_ACK) {
         [self connectFailed];
-    } else if (connectState==CONNECT_STATE_CONNECTED) {
-        [_playerNetwork startReconnect];
-    } else if (connectState==RECONNECT_STATE_POLL||
-               connectState==RECONNECT_STATE_READ_TABLE_INFO||
-               connectState==RECONNECT_STATE_READ_ACK) {
-        [self reconnectFailed];
+    } else if (connectState==CONNECT_STATE_CONNECTED||
+               connectState==CONNECT_STATE_LISTENING) {
+        [self disconnectCurrentGame];
+        [_playerNetwork notifyConnectionLost];
     }
 }
 

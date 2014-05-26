@@ -125,24 +125,22 @@ static const int DEFAULT_CHIP_AMOUNTS[]={8,4,2};
     _okButton.touchable=YES;
     [_cancelButton fadeIn];
     _cancelButton.touchable=YES;
-    if (!self.loadedGame) {
-        [_instrLabel fadeIn];
-        [_totalLabel fadeIn];
-        [_totalNumberLabel fadeIn];
-        for (int i=0;i<CHIP_CASE_CHIP_TYPES;i++) {
-            DPCChipStack* thisStack=[_chipStacks objectAtIndex:i];
-            [thisStack fadeIn];
-            thisStack.totalShowing=YES;
-            [thisStack.totalLabel fadeIn];
-            DPCSprite* thisUpArrow=[_upArrows objectAtIndex:i];
-            [thisUpArrow fadeIn];
-            thisUpArrow.touchable=YES;
-            DPCSprite* thisDownArrow=[_downArrows objectAtIndex:i];
-            [thisDownArrow fadeIn];
-            thisDownArrow.touchable=YES;
-        }
-        [self updateBuyinTotal];
+    [_instrLabel fadeIn];
+    [_totalLabel fadeIn];
+    [_totalNumberLabel fadeIn];
+    for (int i=0;i<CHIP_CASE_CHIP_TYPES;i++) {
+        DPCChipStack* thisStack=[_chipStacks objectAtIndex:i];
+        [thisStack fadeIn];
+        thisStack.totalShowing=YES;
+        [thisStack.totalLabel fadeIn];
+        DPCSprite* thisUpArrow=[_upArrows objectAtIndex:i];
+        [thisUpArrow fadeIn];
+        thisUpArrow.touchable=YES;
+        DPCSprite* thisDownArrow=[_downArrows objectAtIndex:i];
+        [thisDownArrow fadeIn];
+        thisDownArrow.touchable=YES;
     }
+    [self updateBuyinTotal];
 }
 
 -(void)stop {

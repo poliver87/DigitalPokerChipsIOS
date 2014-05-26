@@ -247,7 +247,6 @@
         for (int index = _responderListCount - 1; index >= 0; index --)
         {
             CCNode *node = _responderList[index];
-            
             // check for hit test
             if ([node hitTestWithWorldPos:worldTouchLocation])
             {
@@ -325,7 +324,6 @@
                         [node touchCancelled:touch withEvent:event];
                     // remove from list
                     [_runningResponderList removeObject:touchEntry];
-
                     // always end exclusive mode
                     _exclusiveMode = NO;
                 }
@@ -396,9 +394,10 @@
                 [node touchEnded:touch withEvent:event];
             // remove from list
             [_runningResponderList removeObject:touchEntry];
-            
             // always end exclusive mode
             _exclusiveMode = NO;
+        } else {
+            //CCLOG(@"touchsedEnded for touch %p not a responder",touch);
         }
     }
 }
@@ -410,6 +409,7 @@
     if (!_enabled) return;
     if (_dirty) [self buildResponderList];
 
+    CCLOG(@"touchesCancelled");
     // go through all touches
     for (UITouch *touch in touches)
     {
@@ -467,6 +467,7 @@
         [node touchCancelled:responder.touch withEvent:responder.event];
     // remove from list
     [_runningResponderList removeObject:responder];
+    CCLOG(@"cancelResponder - _runningResponderList removeObject");
 }
 
 // -----------------------------------------------------------------
@@ -748,6 +749,7 @@
 - (void)cancelResponder:(CCRunningResponder *)responder
 {
     [_runningResponderList removeObject:responder];
+    CCLOG(@"cancelResponder - _runningResponderList removeObject");
 }
 
 // -----------------------------------------------------------------

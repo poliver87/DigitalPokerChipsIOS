@@ -38,4 +38,23 @@ int const CHIP_CASE_CHIP_TYPES=3;
     }
 }
 
+-(NSArray*)calculateSimplestBuild:(int)value {
+    NSMutableArray* num=[NSMutableArray array];
+    for (int i=0;i<CHIP_CASE_CHIP_TYPES;i++) {
+        [num addObject:[NSNumber numberWithInt:0]];
+    }
+    while (value>=[[_values objectAtIndex:CHIP_CASE_CHIP_A] intValue]) {
+        for(int chipType=CHIP_CASE_CHIP_TYPES-1;chipType>=0;chipType--) {
+            if (value>=[[_values objectAtIndex:chipType] intValue]) {
+                int thisNum=[[num objectAtIndex:chipType] intValue];
+                thisNum++;
+                [num setObject:[NSNumber numberWithInt:thisNum] atIndexedSubscript:chipType];
+                value-=[[_values objectAtIndex:chipType] intValue];
+                break;
+            }
+        }
+    }
+    return num;
+}
+
 @end

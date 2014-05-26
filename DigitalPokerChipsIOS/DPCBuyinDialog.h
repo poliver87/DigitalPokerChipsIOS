@@ -11,8 +11,6 @@
 
 @interface DPCBuyinDialog : DPCDialog
 
-@property BOOL loadedGame;
-
 @property DPCTextLabel* titleLabel;
 @property DPCTextLabel* instrLabel;
 @property DPCTextLabel* totalLabel;
@@ -25,7 +23,6 @@
 @property NSMutableArray* chipNodes;
 
 -(void)setTableName:(NSString*)tableName;
--(void)setLoadedGame:(BOOL)loadedGame;
 
 -(void)amountUp:(int) stackIndex;
 -(void)amountDown:(int)stackIndex;

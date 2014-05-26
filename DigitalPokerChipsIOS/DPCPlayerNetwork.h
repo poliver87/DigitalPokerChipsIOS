@@ -10,8 +10,6 @@
 #import "DPCThisPlayer.h"
 #import "DPCDiscoveredTable.h"
 
-extern NSString *const PLAYER_TAG_PLAYER_NAME_OPEN;
-extern NSString *const PLAYER_TAG_PLAYER_NAME_CLOSE;
 extern NSString *const PLAYER_TAG_PLAYER_NAME_NEG_OPEN;
 extern NSString *const PLAYER_TAG_PLAYER_NAME_NEG_CLOSE;
 extern NSString *const PLAYER_TAG_SUBMIT_MOVE_OPEN;
@@ -30,9 +28,6 @@ extern NSString *const PLAYER_TAG_NUM_C_OPEN;
 extern NSString *const PLAYER_TAG_NUM_C_CLOSE;
 extern NSString *const PLAYER_TAG_GOODBYE;
 extern NSString *const PLAYER_TAG_RECONNECT_FAILED;
-extern NSString *const PLAYER_TAG_SETUP_ACK;
-extern NSString *const PLAYER_TAG_CHIPS_ACK;
-extern NSString *const PLAYER_TAG_GOODBYE_ACK;
 extern NSString *const PLAYER_TAG_SEND_BELL_OPEN;
 extern NSString *const PLAYER_TAG_SEND_BELL_CLOSE;
 
@@ -47,19 +42,17 @@ extern NSString *const PLAYER_TAG_SEND_BELL_CLOSE;
 -(void) requestInvitation:(NSData*) hostBytes;
 -(void) setWifiEnabled:(BOOL)en;
 -(BOOL) validateTableInfo:(NSString*)msg;
--(BOOL) validateReconnectTableInfo:(NSString*)msg;
 -(BOOL) validateTableACK:(NSString*)ackMsg;
--(BOOL) validateReconnectACK:(NSString*)ackMsg;
--(void) startReconnect;
--(void) notifyReconnected;
 -(void) requestConnect:(DPCDiscoveredTable*)table azimuth:(int)azimuth chipNumbers:(NSArray*)chipNumbers;
+-(void) stopListen;
 -(void) setName:(NSString*)playerName;
 -(void) submitMove:(int)move chipString:(NSString*)chipString;
 -(void) leaveTable;
 -(void) sendBell:(NSString*) hostName;
--(void) notifyTableFound:(NSData*) hostBytes rxMsg:(NSString*)rxMsg;
+-(void) discoverResponseRxd:(NSData*) hostBytes rxMsg:(NSString*)rxMsg;
 -(void) notifyGameConnected:(NSString*)msg;
 -(void) notifyConnectFailed;
+-(void) notifyConnectionLost;
 -(void) parseGameMessage:(NSString*)msg;
 
 @end

@@ -245,6 +245,12 @@
     return value;
 }
 
+-(void)buildStackFrom:(NSArray*)build {
+    for (int chip=CHIP_CASE_CHIP_TYPES-1;chip>=0;chip--) {
+        [self addChipsOfType:chip number:[[build objectAtIndex:chip] intValue]];
+    }
+}
+
 -(NSString*)description {
     NSString* str=@"";
     for (int i=0;i<self.size;i++) {

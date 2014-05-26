@@ -19,11 +19,10 @@
 -(void) stopDiscover;
 -(void) startDiscover:(NSString*)playerAnnounceStr;
 -(void) playerConnect:(NSData*)hostBytes connectString:(NSString*)connectString;
+-(void) startListen;
+-(void) stopListen;
 -(void) sendToHost:(NSString*)msg;
 -(void) leaveTable:(NSString*)msg;
--(void) startReconnect:(NSData*)hostBytes reconnectString:(NSString*)connectString;
--(void) stopReconnect;
--(void)stopListen;
 -(void) disconnectCurrentGame;
 
 @end

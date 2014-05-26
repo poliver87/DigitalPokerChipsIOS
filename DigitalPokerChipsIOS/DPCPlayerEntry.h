@@ -11,12 +11,11 @@
 
 @interface DPCPlayerEntry : CCNode
 
-@property NSString* hostName;
 @property int amount;
 @property DPCTextLabel* playerName;
 @property DPCTextLabel* amountLabel;
 
--(id)initWithHostName:(NSString*)hostName playerName:(NSString*)playerName amount:(int)amount;
+-(id)initWithPlayerName:(NSString*)playerName amount:(int)amount;
 -(NSComparisonResult)compare:(DPCPlayerEntry*)otherObject;
 
 +(void)setTextSize:(int)size;

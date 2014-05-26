@@ -23,4 +23,6 @@ extern int const CHIP_CASE_CHIP_TYPES;
 -(int)getValueForChipType:(int)chipType;
 -(void)setValuesFromChipCase:(DPCChipCase*)chipCase;
 
+-(NSArray*)calculateSimplestBuild:(int)value;
+
 @end

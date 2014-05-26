@@ -129,11 +129,13 @@
 }
 
 -(void)show {
-    self.visible=YES;
+    if (!self.visible) {
+        self.visible=YES;
+        self.position=ccp(xHidden,self.position.y);
+    }
     _bellButton.visible=NO;
     animationState=STATE_SHOW;
     self.handle.touchable=YES;
-    self.position=ccp(xHidden,self.position.y);
 }
 
 -(void)remove {
@@ -182,13 +184,13 @@
     //sort the list
 }
 
--(void)enableNudge:(NSString *)hostName {
+-(void)enableNudge:(NSString *)name {
     _bellButton.opacity=1;
     _bellButton.touchable=YES;
-    _nudgeHostName=hostName;
+    _nudgeName=name;
     for (int i=0;i<self.playerList.children.count;i++) {
         DPCPlayerEntry* thisEntry=[self.playerList.children objectAtIndex:i];
-        if ([thisEntry.hostName isEqualToString:hostName]) {
+        if ([thisEntry.playerName.string isEqualToString:name]) {
             float yBell=thisEntry.position.y;
             _bellButton.position=ccp(xBellButtonCentreOffset,yBell);
         }

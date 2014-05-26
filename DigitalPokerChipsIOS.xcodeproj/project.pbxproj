@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB08415D192E38FE00FAAA9A /* DPCMovePrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = FB08415C192E38FE00FAAA9A /* DPCMovePrompt.m */; };
+		FB084160192E3A1300FAAA9A /* DPCMove.m in Sources */ = {isa = PBXBuildFile; fileRef = FB08415F192E3A1300FAAA9A /* DPCMove.m */; };
 		FB55EADC190EAA2400636739 /* DPCBuyinDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAA5190EAA2400636739 /* DPCBuyinDialog.m */; };
 		FB55EADD190EAA2400636739 /* DPCCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAA7190EAA2400636739 /* DPCCamera.m */; };
 		FB55EADE190EAA2400636739 /* DPCCameraPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = FB55EAA9190EAA2400636739 /* DPCCameraPosition.m */; };
@@ -294,6 +296,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FB08415B192E38FE00FAAA9A /* DPCMovePrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCMovePrompt.h; sourceTree = "<group>"; };
+		FB08415C192E38FE00FAAA9A /* DPCMovePrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCMovePrompt.m; sourceTree = "<group>"; };
+		FB08415E192E3A1300FAAA9A /* DPCMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCMove.h; sourceTree = "<group>"; };
+		FB08415F192E3A1300FAAA9A /* DPCMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCMove.m; sourceTree = "<group>"; };
 		FB55EAA4190EAA2400636739 /* DPCBuyinDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCBuyinDialog.h; sourceTree = "<group>"; };
 		FB55EAA5190EAA2400636739 /* DPCBuyinDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCBuyinDialog.m; sourceTree = "<group>"; };
 		FB55EAA6190EAA2400636739 /* DPCCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCCamera.h; sourceTree = "<group>"; };
@@ -1773,6 +1779,10 @@
 				FB55EAA7190EAA2400636739 /* DPCCamera.m */,
 				FB55EAA8190EAA2400636739 /* DPCCameraPosition.h */,
 				FB55EAA9190EAA2400636739 /* DPCCameraPosition.m */,
+				FB08415B192E38FE00FAAA9A /* DPCMovePrompt.h */,
+				FB08415C192E38FE00FAAA9A /* DPCMovePrompt.m */,
+				FB08415E192E3A1300FAAA9A /* DPCMove.h */,
+				FB08415F192E3A1300FAAA9A /* DPCMove.m */,
 				FB888B2C190E9672001FC737 /* AppDelegate.h */,
 				FB888B2D190E9672001FC737 /* AppDelegate.m */,
 				FB55EAB8190EAA2400636739 /* DPCGame.h */,
@@ -1960,6 +1970,7 @@
 			files = (
 				FB55EB01190EBB9500636739 /* Reachability.h in Sources */,
 				FB55EB00190EBB5B00636739 /* Reachability.m in Sources */,
+				FB08415D192E38FE00FAAA9A /* DPCMovePrompt.m in Sources */,
 				FB55EAE9190EAA2400636739 /* DPCLeaveTableDialog.m in Sources */,
 				FB55EAE7190EAA2400636739 /* DPCGameLogic.m in Sources */,
 				FB55EAE1190EAA2400636739 /* DPCChipStack.m in Sources */,
@@ -2095,6 +2106,7 @@
 				FB55EAE2190EAA2400636739 /* DPCClosedDialog.m in Sources */,
 				FB888A2F190E9671001FC737 /* ALSoundSourcePool.m in Sources */,
 				FB88893E190E9670001FC737 /* CCParticleSystemBase.m in Sources */,
+				FB084160192E3A1300FAAA9A /* DPCMove.m in Sources */,
 				FB8889D5190E9671001FC737 /* CCColor.m in Sources */,
 				FB888A22190E9671001FC737 /* ALChannelSource.m in Sources */,
 				FB8888CE190E9670001FC737 /* CCActionCatmullRom.m in Sources */,
