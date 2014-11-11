@@ -23,6 +23,9 @@
 
 -(id) init {
     if ((self=[super init])) {
+        
+        // this should be in master not prototype
+        
         _mCamera = [[DPCCamera alloc] init];
         
         CCSprite *background_lb = [CCSprite spriteWithImageNamed:@"background_lb.png"];
